@@ -6,29 +6,27 @@
                 <h5 class="modal-title" id="exampleModalLabel"> اضافة طلب سحب </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{url('admin/withdraw/add')}}" method="post">
+            <form action="{{url('user/withdraw/add')}}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for=""> المستخدم </label>
-                        <select required name="user_id" class="form-control" id="">
-                            @foreach($users as $user)
-                                <option value="{{$user['id']}}">{{$user['name']}}</option>
-                            @endforeach
-                        </select>
+                        <input class="form-control" type="text" disabled readonly value="{{\Illuminate\Support\Facades\Auth::user()->name}}">
                     </div>
                     <div class="mb-3">
-                        <label for="">المبلغ <span class="badge badge-danger bg-danger"> دولار </span> </label>
-                        <input required type="number" min="1" name="amount" class="form-control" placeholder="المبلغ "
+                        <label for="">المبلغ <span class="badge badge-danger bg-danger"> اقل مبلغ للحسب هو 50 دولار </span> </label>
+                        <input required type="number" min="20" name="amount" class="form-control" placeholder="المبلغ "
                                value="">
                     </div>
                     <div class="mb-3">
                         <label for=""> حدد المحفظة </label>
                         <select required name="withdraw_method" class="form-control" id="">
-                            <option value="فودافون كاش"> فودافون كاش</option>
-                            <option value="اورانج كاش">اورانج كاش</option>
-                            <option value="بيتكوين"> بيتكوين</option>
+                            <option selected value="USDT-TRC20"> USDT-TRC20 </option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for=""> ادخل عنوان المحفظة  </label>
+                        <input class="form-control" type="text" name="usdt_link" value="">
                     </div>
                 </div>
                 <div class="modal-footer">

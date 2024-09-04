@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('trader_ids', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('trader_id');
+            $table->tinyInteger('status')->default('0')->comment('غير فعال ');
             $table->timestamps();
         });
     }

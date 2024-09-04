@@ -7,22 +7,23 @@ use \App\Http\Controllers\admin\WithDrawController;
 use \App\Http\Controllers\admin\BootController;
 use \App\Http\Controllers\admin\SupportController;
 use \App\Http\Controllers\admin\FaqController;
+use \App\Http\Controllers\admin\MessageReplay;
 Route::group(['prefix' => 'admin'], function () {
-// Admin Login
+    // Admin Login
 
     Route::controller(AdminController::class)->group(function () {
         Route::match(['post', 'get'], '/', 'login')->name('admin_login');
         Route::match(['post', 'get'], 'login', 'login')->name('admin_login');
         Route::match(['post','get'],'sign-up','signup');
         Route::match(['post','get'],'forget-password','forget_password');
-// Admin Dashboard
+    // Admin Dashboard
         Route::group(['middleware' => 'admin'], function () {
             Route::get('dashboard', 'dashboard');
-// update admin password
+    // update admin password
             Route::match(['post', 'get'], 'update_admin_password', 'update_admin_password');
-// check Admin Password
+    // check Admin Password
             Route::post('check_admin_password', 'check_admin_password');
-// Update Admin Details
+    // Update Admin Details
             Route::match(['post', 'get'], 'update_admin_details', 'update_admin_details');
             Route::get('logout', 'logout')->name('logout');
         });
@@ -60,8 +61,16 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('message/delete/{id}','delete');
         });
 
+        //////////// Message Replay
+        ///
+        Route::controller(MessageReplay::class)->group(function (){
+           Route::get('messages_replay/{id}','index');
+           Route::match(['post','get'],'message_replay/add/{id}','store');
+        });
+
         //////////////////// Start Faqs //////////////
         ///
+
         Route::controller(FaqController::class)->group(function (){
             Route::get('faqs','index');
             Route::match(['post','get'],'faq/add','store');

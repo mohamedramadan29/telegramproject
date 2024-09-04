@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('message_replays', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('message_id')->references('id')->on('supports')->cascadeOnDelete();
+            $table->text('replay');
+            $table->text('attachments')->nullable();
+            $table->string('user_replay')->default('admin');
             $table->timestamps();
         });
     }

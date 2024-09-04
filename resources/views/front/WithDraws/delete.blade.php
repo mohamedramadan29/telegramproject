@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="exampleModalLabel"> هل انت متاكد من حذف السمة   </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{url('admin/withdraw/delete/'.$withdraw['id'])}}" method="post">
+            <form action="{{url('user/withdraw/delete/'.$withdraw['id'])}}" method="post">
                 @csrf
                 <div class="modal-body">
                     <label for=""> المبلغ   </label>

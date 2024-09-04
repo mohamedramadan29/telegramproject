@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for=""> المبلغ </label>
-                        <input type="text" name="name" class="form-control" value="{{$withdraw['amount']}}">
+                        <input disabled readonly type="text" name="name" class="form-control" value="{{$withdraw['amount']}}">
                     </div>
                     <div class="mb-3">
                         <label for=""> تعديل الحالة  </label>

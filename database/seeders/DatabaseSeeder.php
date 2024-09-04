@@ -13,9 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-      //  $this->call(TransactionSeeder::class);
+        $this->call(AdminSeeder::class);
 
-        Transaction::factory()->count(20)->create();
+
+        /////// Insert Transaction Coulms In DB /////
+       //Transaction::factory()->count(20)->create();
 
         // \App\Models\User::factory(10)->create();
 

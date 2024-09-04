@@ -18,7 +18,7 @@ class SupportController extends Controller
 
     public function index()
     {
-        $messages = Support::orderby('id', 'desc')->get();
+        $messages = Support::with('user')->orderby('id', 'desc')->get();
         return view('admin.Support.index', compact('messages'));
     }
 

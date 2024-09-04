@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="exampleModalLabel"> تعديل حالة الطلب </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{url('admin/withdraw/update/'.$withdraw['id'])}}" method="post">
+            <form action="{{url('user/withdraw/update/'.$withdraw['id'])}}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">

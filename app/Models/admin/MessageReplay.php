@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class MessageReplay extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 }

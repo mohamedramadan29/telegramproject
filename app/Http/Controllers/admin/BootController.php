@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class BootController extends Controller
 {
+
     use Message_Trait;
 
     public function index()

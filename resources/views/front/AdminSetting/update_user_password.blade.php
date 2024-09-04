@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
     حسابي - تعديل كلمة المرور
 @endsection
@@ -7,10 +7,9 @@
 @section('content')
     <!-- ==================================================== -->
     <div class="page-content">
-
         <!-- Start Container Fluid -->
         <div class="container-xxl">
-            <form name="updateAdminPasswordForm" method="post" action="{{url('admin/update_admin_password')}}"
+            <form name="updateAdminPasswordForm" method="post" action="{{url('user/update_user_password')}}"
                   enctype="multipart/form-data" autocomplete="off">
                 @csrf
 
@@ -92,8 +91,8 @@
         <!-- End Page Content -->
         <!-- ==================================================== -->
         @endsection
-
         @section('js')
+{{--            <script src="{{asset('assets/front/js/custome.js')}}">  </script>--}}
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <script>
                 // Check Old Admin Password
@@ -102,7 +101,7 @@
                     var csrf_token = '{{ csrf_token() }}'; // Include the CSRF token here
                     $.ajax({
                         type: 'post',
-                        url: 'check_admin_password',
+                        url: 'check_user_password',
                         data: {
                             current_password: current_password,
                             _token: csrf_token // Add the CSRF token to the data
@@ -113,10 +112,11 @@
                             } else if (response == 'false') {
                                 $("#check_password").html('<p style="color:red"> كلمة المرور خطا </p>');
                             }
-                        },
-                        error: function () {
-                            alert('Error');
                         }
+                        // ,
+                        // error: function () {
+                        //     alert('Error');
+                        // }
                     });
                 });
             </script>

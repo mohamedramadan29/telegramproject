@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
    الاسئلة الشائعه
 @endsection

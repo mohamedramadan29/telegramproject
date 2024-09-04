@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
      اضافة رد علي الرسالة
 @endsection
@@ -10,7 +10,7 @@
 
         <!-- Start Container Fluid -->
         <div class="container-xxl">
-            <form method="post" action="{{url('admin/message_replay/add/'.$message['id'])}}" enctype="multipart/form-data">
+            <form method="post" action="{{url('user/message_replay/add/'.$message['id'])}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">

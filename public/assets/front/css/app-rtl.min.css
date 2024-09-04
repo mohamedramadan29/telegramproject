@@ -24685,4 +24685,11 @@ table.dataTable tbody th, table.dataTable tbody td{
 table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td{
     text-align:right !important;
 }
+
+.topbar{
+    background-color:#fff !important;
+    margin-bottom: 10px;
+}
 /***************************** End New Style  ***********************/
+
+

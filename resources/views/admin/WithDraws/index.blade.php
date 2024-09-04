@@ -50,6 +50,7 @@
                                         <th> المستخدم</th>
                                         <th> المبلغ</th>
                                         <th> المحفظة</th>
+                                        <th> عنوان المحفظة</th>
                                         <th> الحالة</th>
                                         <th> العمليات</th>
                                     </tr>
@@ -67,6 +68,14 @@
                                             <td> {{$withdraw['user']['name']}} </td>
                                             <td> {{$withdraw['amount']}} دولار</td>
                                             <td> {{$withdraw['withdraw_method']}} </td>
+                                            <td>
+                                                <span
+                                                    id="usdtLink_{{$withdraw['id']}}">{{$withdraw['usdt_link']}}</span>
+                                                <button onclick="copyToClipboard('#usdtLink_{{$withdraw['id']}}')"
+                                                        class="btn btn-sm btn-secondary">
+                                                    <i class='bx bx-copy'></i>
+                                                </button>
+                                            </td>
                                             <td>
                                                 @if($withdraw['status'] == 0)
                                                     <span class="badge bg-warning"> تحت المراجعه  </span>
@@ -102,6 +111,17 @@
 
                                     </tbody>
                                 </table>
+                                <script>
+                                    function copyToClipboard(element) {
+                                        var temp = document.createElement("textarea");
+                                        temp.value = document.querySelector(element).textContent;
+                                        document.body.appendChild(temp);
+                                        temp.select();
+                                        document.execCommand("copy");
+                                        document.body.removeChild(temp);
+                                        alert("تم نسخ الرابط بنجاح!");
+                                    }
+                                </script>
                             </div>
                             <!-- end table-responsive -->
                         </div>

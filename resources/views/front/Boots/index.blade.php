@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
     البوتات
 @endsection
@@ -30,12 +30,6 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
                             <h4 class="card-title flex-grow-1"> البوتات  </h4>
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#add_attribute">
-                               اضافة بوت
-                                <i class="ti ti-plus"></i>
-                            </button>
-                            @include('admin.Boots.add')
                         </div>
 
 
@@ -50,7 +44,6 @@
                                         <th>  اسم البوت </th>
                                         <th> المسمي التعريفي </th>
                                         <th>  رابط البوت   </th>
-                                        <th> العمليات</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -66,28 +59,9 @@
                                             <td><img width="30px" src="{{asset('assets/admin/images/boot.jpg')}}" alt=""> {{$boot['name']}} </td>
                                             <td> {{$boot['username']}}  </td>
                                             <td><a href="{{$boot['link']}}" class="btn btn-success"> زيارة البوت  </a>  </td>
-                                            <td>
-                                                <div class="d-flex gap-2">
-                                                    <button type="button" class="btn btn-soft-danger btn-sm"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#edit_withdraw_{{$boot['id']}}">
-                                                        <iconify-icon icon="solar:pen-2-broken"
-                                                                      class="align-middle fs-18"></iconify-icon>
-                                                    </button>
 
-                                                        <button type="button" class="btn btn-soft-danger btn-sm"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#delete_withdraw_{{$boot['id']}}">
-                                                            <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
-                                                                          class="align-middle fs-18"></iconify-icon>
-                                                        </button>
-
-                                                </div>
-                                            </td>
                                         </tr>
-                                        <!-- Modal -->
-                                        @include('admin.Boots.update')
-                                        @include('admin.Boots.delete')
+
                                     @endforeach
 
                                     </tbody>

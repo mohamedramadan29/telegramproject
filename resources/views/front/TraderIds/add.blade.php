@@ -3,26 +3,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> اضافة بوت جديد  </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> اضافة رمز جديد  </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{url('admin/boot/add')}}" method="post">
+            <form action="{{url('user/trader-id/add')}}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for=""> الاسم  </label>
-                        <input required type="text" name="name" class="form-control" placeholder="اسم البوت  "
-                               value="{{old('name')}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for=""> الاسم التعريفي  </label>
-                        <input required type="text" name="username" class="form-control" placeholder="الاسم التعريفي"
-                               value="{{old('username')}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for=""> الرابط   </label>
-                        <input required type="text" name="link" class="form-control" placeholder="الرابط"
-                               value="{{old('link')}}">
+                        <label for=""> ادخل الرمز التعريفي  </label>
+                        <input required type="text" name="trader_id" class="form-control"
+                               value="{{old('trader_id')}}">
                     </div>
                 </div>
                 <div class="modal-footer">

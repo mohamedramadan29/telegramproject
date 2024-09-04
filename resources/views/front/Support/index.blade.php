@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
     رسائل الدعم الفني
 @endsection
@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
                             <h4 class="card-title flex-grow-1"> رسائل الدعم الفني </h4>
-                            <a href="{{url('admin/message/add')}}" class="btn btn-sm btn-primary"> اضف رسالة جديدة <i
+                            <a href="{{url('user/message/add')}}" class="btn btn-sm btn-primary"> اضف رسالة جديدة <i
                                     class="ti ti-plus"></i></a>
                         </div>
 
@@ -43,11 +43,10 @@
                                     <tr>
                                         <th style="width: 20px;">
                                         </th>
-                                        <th> المستخدم</th>
                                         <th> عنوان الرسالة</th>
                                         <th> الحالة</th>
                                         <th> التاريخ</th>
-                                        <th> العمليات</th>
+                                        <th> </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -60,34 +59,33 @@
                                             <td>
                                                 {{$i++}}
                                             </td>
-                                            <td> {{$message['user_id']}} </td>
                                             <td> {{$message['subject']}} </td>
                                             <td>
                                                 @if($message['status'] == 0)
                                                     <span class="badge bg-warning"> تحت المراجعه  </span>
-                                                @elseif($message['status'] == 1)
-                                                    <span class="badge bg-success"> تم الرد  </span>
+                                                @else
+                                                    <span class="badge bg-success"> {{$message['status']}}  </span>
                                             @endif
                                             </td>
                                             <td> {{$message['created_at']}} </td>
                                             <td>
-                                                <div class="d-flex gap-2">
-                                                    <a href="{{url('admin/message/update/'.$message['id'])}}" class="btn btn-soft-success btn-sm"> تفاصيل الرسالة
+                                                <a href="{{url('user/message/update/'.$message['id'])}}" class="btn btn-soft-success btn-sm"> تفاصيل الرسالة
+                                                    <iconify-icon icon="solar:pen-2-broken"
+                                                                  class="align-middle fs-18"></iconify-icon>
+
+                                                </a>
+                                                @if($message['status'] != 0)
+                                                    <a href="{{url('user/messages_replay/'.$message['id'])}}"
+                                                       class="btn btn-soft-warning btn-sm">  اضافة رد
                                                         <iconify-icon icon="solar:pen-2-broken"
                                                                       class="align-middle fs-18"></iconify-icon>
 
                                                     </a>
-                                                    </button>
-                                                    <button type="button" class="btn btn-soft-danger btn-sm"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#delete_message_{{$message['id']}}">
-                                                        <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
-                                                                      class="align-middle fs-18"></iconify-icon>
-                                                    </button>
-                                                </div>
+                                                @endif
+
+
                                             </td>
                                         </tr>
-                                        @include('admin.Support.delete')
                                     @endforeach
                                     </tbody>
                                 </table>

@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
     تفاصيل التذكرة
 @endsection
@@ -51,10 +51,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label for="name" class="form-label"> اضافة المرفقات </label>
-                                            <input type="file" multiple id="subject" class="form-control"
-                                                   name="images[]"
-                                                   value="">
+                                            <label for="name" class="form-label"> المرفقات </label>
                                             <div class="images">
                                                 @php
                                                     $images = explode(',',$support['attachments']);
@@ -70,27 +67,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label"> تعديل الحالة </label>
-                                            <select name="status" class="form-control" id="">
-                                                <option @if($support['status'] == 0) selected @endif value="0"> تحت
-                                                    المراجعه
-                                                </option>
-                                                <option @if($support['status'] == 1) selected @endif value="1"> تم
-                                                    الرد
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3 bg-light mb-3 rounded">
-                            <div class="row justify-content-end g-2">
-                                <div class="col-lg-2">
-                                    <button type="submit" class="btn btn-outline-secondary w-100"> تعديل <i
-                                            class='bx bxs-save'></i></button>
                                 </div>
                             </div>
                         </div>

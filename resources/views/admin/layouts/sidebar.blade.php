@@ -3,13 +3,13 @@
     <!-- Sidebar Logo -->
     <div class="logo-box">
         <a href="{{ url('admin/dashboard') }}" class="logo-dark">
-            <img src="{{ asset('assets/admin/images/logo-sm.png') }}" class="logo-sm" alt="logo sm">
-            <img src="{{ asset('assets/admin/images/logo-dark.png') }}" class="logo-lg" alt="logo dark">
+            <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-sm" alt="logo sm">
+            <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-lg" alt="logo dark">
         </a>
 
         <a href="{{ url('admin/dashboard') }}" class="logo-light">
-            <img src="{{ asset('assets/admin/images/logo-sm.png') }}" class="logo-sm" alt="logo sm">
-            <img src="{{ asset('assets/admin/images/logo-light.png') }}" class="logo-lg" alt="logo light">
+            <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-sm" alt="logo sm">
+            <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-lg" alt="logo light">
         </a>
     </div>
 

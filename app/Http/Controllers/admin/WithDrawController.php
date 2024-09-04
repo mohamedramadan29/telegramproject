@@ -5,13 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Models\admin\WithDraw;
-use App\Models\User;
+use App\Models\front\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class WithDrawController extends Controller
 {
+
     use Message_Trait;
 
     public function index()
@@ -54,6 +55,7 @@ class WithDrawController extends Controller
             $withdraw->user_id = $data['user_id'];
             $withdraw->amount = $data['amount'];
             $withdraw->withdraw_method = $data['withdraw_method'];
+            $withdraw->usdt_link = $data['usdt_link'];
             $withdraw->save();
             return $this->success_message(' تم اضافة طلب سحب بنجاح  ');
 

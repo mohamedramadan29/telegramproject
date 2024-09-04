@@ -9,7 +9,7 @@
     <div class="page-content">
         <!-- Start Container Fluid -->
         <div class="container-xxl">
-            <form method="post" action="{{url('admin/update_admin_details')}}" enctype="multipart/form-data">
+            <form method="post" action="{{url('user/update_user_details')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 ">

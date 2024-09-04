@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('country')->nullable();
             $table->string('telegram_id')->nullable();
+            $table->string('trader_id')->nullable();
             $table->string('balance')->nullable();
+            $table->tinyInteger('status');
             $table->rememberToken();
             $table->timestamps();
         });

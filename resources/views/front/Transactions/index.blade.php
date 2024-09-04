@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
     المعاملات المالية
 @endsection
@@ -27,49 +27,103 @@
                     @endforeach
                 @endif
                 <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title flex-grow-1"> اضافة Id جديد  </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="my_balance mb-3">
+                                                <div class="info">
+                                                    <h5>  اضافة Id جديد   </h5>
+                                                </div>
+                                            </div>
+                                            <form method="post" action="{{url('user/trader-id/add')}}">
+                                                @csrf
+                                                <div class="mb-3">
+                                                    <label for="" class="mb-2"> ادخل ال Id </label>
+                                                    <input type="number" class="form-control" value="" name="trader_id">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <button type="submit" class="btn btn-primary">  اضافة
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <style>
+                                    .my_balance {
+                                    }
+
+                                    .my_balance .info {
+                                        background-color: #1E1E2D;
+                                        color: #fff;
+                                        padding: 15px;
+                                        border-radius: 10px;
+                                        text-align: center;
+                                    }
+
+                                    .my_balance .info h5 {
+                                        color: #fff;
+                                        font-size: 25px;
+                                        margin-bottom: 15px;
+                                    }
+
+                                    .my_balance .info p {
+                                        font-size: 20px;
+                                    }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                            <h4 class="card-title flex-grow-1">  المعاملات المالية   </h4>
+                            <h4 class="card-title flex-grow-1"> المعاملات المالية </h4>
                         </div>
 
 
                         <div>
                             <div class="table-responsive">
-                                <table id="table-search" class="table table-bordered gridjs-table align-middle mb-0 table-hover table-centered">
+                                <table id="table-search"
+                                       class="table table-bordered gridjs-table align-middle mb-0 table-hover table-centered">
                                     <thead class="bg-light-subtle">
                                     <tr>
-                                        <th style="width: 20px;">
-                                        </th>
-                                        <th> المعرف   </th>
-                                        <th>  الدولة  </th>
-                                        <th>  الرمز التعريفي  </th>
-                                        <th>  الرصيد </th>
-                                        <th> عدد مرات الايداع  </th>
-                                        <th> مجموع الايداع   </th>
-                                        <th> مرات السحب </th>
-                                        <th>  المجموع  </th>
-                                        <th> التاريخ   </th>
+                                        <th> المعرف (id)</th>
+                                        <th> الرصيد</th>
+                                        <th> عدد الايداعات</th>
+                                        <th> مجموع الايداعات</th>
+                                        <th> عدد السحوبات</th>
+                                        <th> مجموع السحوبات</th>
+                                        <th> حجم التداول</th>
+                                        <th> حصة الشريك</th>
+                                        <th> حالة الحساب  </th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @php
-
-                                        $i = 1;
-                                    @endphp
                                     @foreach($transactions as $transaction)
                                         <tr>
                                             <td>
-                                                {{$i++}}
+                                                <p> {{$transaction['trader-id']}} </p>
+                                                <p> {{$transaction['country']}}  </p>
+                                                <p> {{$transaction['registery-date']}} </p>
                                             </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
+                                            <td> {{$transaction['balance']}} </td>
+                                            <td> {{$transaction['deposits-count']}} </td>
+                                            <td> {{$transaction['deposits-sum']}} </td>
+                                            <td> {{$transaction['withdrawals-count']}} </td>
+                                            <td> {{$transaction['withdrawals-sum']}} </td>
+                                            <td> {{$transaction['turnover-clear']}} </td>
+                                            <td> {{$transaction['vol-share']}} </td>
+                                            <td> @if($transaction['is-closed'] == 0)
+                                                     <span class="badge badge-outline-success"> فعال </span>
+                                                @else
+                                                     <span class="badge badge-outline-danger"> غير فعال </span>
+                                            @endif </td>
                                         </tr>
                                     @endforeach
 
@@ -98,7 +152,7 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // تحقق ما إذا كان الجدول قد تم تهيئته من قبل
             if ($.fn.DataTable.isDataTable('#table-search')) {
                 $('#table-search').DataTable().destroy(); // تدمير التهيئة السابقة

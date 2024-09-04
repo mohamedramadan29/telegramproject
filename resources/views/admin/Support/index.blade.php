@@ -60,24 +60,31 @@
                                             <td>
                                                 {{$i++}}
                                             </td>
-                                            <td> {{$message['user_id']}} </td>
+                                            <td> {{$message['user']['name']}} </td>
                                             <td> {{$message['subject']}} </td>
                                             <td>
                                                 @if($message['status'] == 0)
                                                     <span class="badge bg-warning"> تحت المراجعه  </span>
-                                                @elseif($message['status'] == 1)
-                                                    <span class="badge bg-success"> تم الرد  </span>
-                                            @endif
+                                                @else
+                                                    <span class="badge bg-success">{{$message['status']}}  </span>
+                                                @endif
                                             </td>
                                             <td> {{$message['created_at']}} </td>
                                             <td>
                                                 <div class="d-flex gap-2">
-                                                    <a href="{{url('admin/message/update/'.$message['id'])}}" class="btn btn-soft-success btn-sm"> تفاصيل الرسالة
+                                                    <a href="{{url('admin/message/update/'.$message['id'])}}"
+                                                       class="btn btn-soft-success btn-sm"> تفاصيل الرسالة
                                                         <iconify-icon icon="solar:pen-2-broken"
                                                                       class="align-middle fs-18"></iconify-icon>
 
                                                     </a>
-                                                    </button>
+                                                    <a href="{{url('admin/messages_replay/'.$message['id'])}}"
+                                                       class="btn btn-soft-warning btn-sm">  اضافة رد
+                                                        <iconify-icon icon="solar:pen-2-broken"
+                                                                      class="align-middle fs-18"></iconify-icon>
+
+                                                    </a>
+
                                                     <button type="button" class="btn btn-soft-danger btn-sm"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete_message_{{$message['id']}}">

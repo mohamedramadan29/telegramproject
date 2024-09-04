@@ -1,9 +1,8 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
     طلبات السحب
 @endsection
 @section('css')
-
     {{--    <!-- DataTables CSS -->--}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 @endsection
@@ -26,16 +25,73 @@
                         @endphp
                     @endforeach
                 @endif
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title flex-grow-1"> الرصيد والمعاملات المالية </h4>
+                        </div>
+                        <div class="card-body my_balance">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="info">
+                                        <h5> الرصيد الكلي </h5>
+                                        <p>  {{number_format($last_vol_share,2)}} $</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="info">
+                                        <h5> طلبت السحب الحالية </h5>
+                                        <p> {{ number_format($withdrawSum,2) }} $ </p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="info">
+                                        <h5> مجموع السحوبات </h5>
+                                        <p> {{ number_format($withdrawSumCompeleted,2) }} $ </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .my_balance {
+                        }
+
+                        .my_balance .info {
+                            background-color: #1E1E2D;
+                            color: #fff;
+                            padding: 15px;
+                            border-radius: 10px;
+                            text-align: center;
+                        }
+
+                        .my_balance .info h5 {
+                            color: #fff;
+                            font-size: 25px;
+                            margin-bottom: 15px;
+                        }
+
+                        .my_balance .info p {
+                            font-size: 20px;
+                        }
+                    </style>
+                </div>
                 <div class="col-xl-12">
                     <div class="card">
+                        @php
+
+                        $issaturday = Carbon\Carbon::now()->isSaturday();
+
+                                @endphp
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
                             <h4 class="card-title flex-grow-1"> طلبات السحب </h4>
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                            <button @if(!$issaturday) disabled @endif type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#add_attribute">
                                 اضافة طلب جديد
                                 <i class="ti ti-plus"></i>
                             </button>
-                            @include('admin.WithDraws.add')
+                            @include('front.WithDraws.add')
                         </div>
 
 
@@ -47,9 +103,9 @@
                                     <tr>
                                         <th style="width: 20px;">
                                         </th>
-                                        <th> المستخدم</th>
                                         <th> المبلغ</th>
                                         <th> المحفظة</th>
+                                        <th> عنوان المحفظة  </th>
                                         <th> الحالة</th>
                                         <th> العمليات</th>
                                     </tr>
@@ -64,9 +120,15 @@
                                             <td>
                                                 {{$i++}}
                                             </td>
-                                            <td> {{$withdraw['user']['name']}} </td>
+
                                             <td> {{$withdraw['amount']}} دولار</td>
                                             <td> {{$withdraw['withdraw_method']}} </td>
+                                            <td>
+                                                <span id="usdtLink_{{$withdraw['id']}}">{{$withdraw['usdt_link']}}</span>
+                                                <button onclick="copyToClipboard('#usdtLink_{{$withdraw['id']}}')" class="btn btn-sm btn-secondary">
+                                                    <i class='bx bx-copy' ></i>
+                                                </button>
+                                            </td>
                                             <td>
                                                 @if($withdraw['status'] == 0)
                                                     <span class="badge bg-warning"> تحت المراجعه  </span>
@@ -77,12 +139,6 @@
                                                 @endif </td>
                                             <td>
                                                 <div class="d-flex gap-2">
-                                                    <button type="button" class="btn btn-soft-danger btn-sm"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#edit_withdraw_{{$withdraw['id']}}">
-                                                        <iconify-icon icon="solar:pen-2-broken"
-                                                                      class="align-middle fs-18"></iconify-icon>
-                                                    </button>
                                                     @if($withdraw['status'] != 1)
                                                         <button type="button" class="btn btn-soft-danger btn-sm"
                                                                 data-bs-toggle="modal"
@@ -96,14 +152,25 @@
                                             </td>
                                         </tr>
                                         <!-- Modal -->
-                                        @include('admin.WithDraws.delete')
-                                        @include('admin.WithDraws.update')
+                                        @include('front.WithDraws.delete')
+                                        @include('front.WithDraws.update')
                                     @endforeach
 
                                     </tbody>
                                 </table>
                             </div>
                             <!-- end table-responsive -->
+                            <script>
+                                function copyToClipboard(element) {
+                                    var temp = document.createElement("textarea");
+                                    temp.value = document.querySelector(element).textContent;
+                                    document.body.appendChild(temp);
+                                    temp.select();
+                                    document.execCommand("copy");
+                                    document.body.removeChild(temp);
+                                    alert("تم نسخ الرابط بنجاح!");
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>

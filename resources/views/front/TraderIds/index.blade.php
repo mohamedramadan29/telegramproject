@@ -1,6 +1,6 @@
 @extends('front.layouts.master')
 @section('title')
-    البوتات
+    الارقام التعريفية الخاصة بك
 @endsection
 @section('css')
 
@@ -29,7 +29,13 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                            <h4 class="card-title flex-grow-1"> البوتات  </h4>
+                            <h4 class="card-title flex-grow-1"> الارقام التعريفية الخاصة بك </h4>
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#add_attribute">
+                              اضافة رمز تعريفي
+                                <i class="ti ti-plus"></i>
+                            </button>
+                            @include('front.TraderIds.add')
                         </div>
 
 
@@ -41,24 +47,27 @@
                                     <tr>
                                         <th style="width: 20px;">
                                         </th>
-                                        <th>  اسم البوت </th>
-                                        <th> المسمي التعريفي </th>
-                                        <th>  رابط البوت   </th>
+                                        <th> الرقم التعريفي</th>
+                                        <th> الحالة</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @php
-
                                         $i = 1;
                                     @endphp
-                                    @foreach($boots as $boot)
+                                    @foreach($tradersids as $traderId)
                                         <tr>
                                             <td>
                                                 {{$i++}}
                                             </td>
-                                            <td><img width="30px" src="{{asset('assets/admin/images/boot.jpg')}}" alt=""> {{$boot['name']}} </td>
-                                            <td> {{$boot['username']}}  </td>
-                                            <td><a href="{{$boot['link']}}" class="btn btn-success"> زيارة البوت  </a>  </td>
+                                            <td> {{$traderId['trader_id']}}  </td>
+                                            <td>
+                                                @if($traderId['status'] == 1)
+                                                    <span class="badge badge-outline-success"> مفعل </span>
+                                                @else
+                                                    <span class="badge badge-outline-danger"> غير مفعل </span>
+                                                @endif
+                                            </td>
 
                                         </tr>
 

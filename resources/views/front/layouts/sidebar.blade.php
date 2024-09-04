@@ -2,14 +2,14 @@
 <div class="main-nav">
     <!-- Sidebar Logo -->
     <div class="logo-box">
-        <a href="{{ url('admin/dashboard') }}" class="logo-dark">
+        <a href="{{ url('user/dashboard') }}" class="logo-dark">
             <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-sm" alt="logo sm">
             <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-lg" alt="logo dark">
         </a>
 
-        <a href="{{ url('admin/dashboard') }}" class="logo-light">
-            <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-sm" alt="logo sm">
-            <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-lg" alt="logo light">
+        <a href="{{ url('user/dashboard') }}" class="logo-light">
+            <img style="width: 70px;height: 70px;" src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-sm" alt="logo sm">
+            <img style="width: 70px;height: 70px;" src="{{ asset('assets/admin/images/logo-letter.svg') }}" class="logo-lg" alt="logo light">
         </a>
     </div>
 
@@ -24,7 +24,7 @@
             <li class="menu-title"> العام</li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/dashboard') }}">
+                <a class="nav-link" href="{{ url('user/dashboard') }}">
                     <span class="nav-icon">
                         <iconify-icon icon="solar:widget-5-bold-duotone"></iconify-icon>
                     </span>
@@ -32,16 +32,25 @@
                 </a>
             </li>
 
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="{{ url('user/traderIds') }}">--}}
+{{--                    <span class="nav-icon">--}}
+{{--                        <iconify-icon icon="solar:tuning-2-bold-duotone"></iconify-icon>--}}
+{{--                    </span>--}}
+{{--                    <span class="nav-text"> الارقام التعريفية  </span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/transactions') }}">
+                <a class="nav-link" href="{{ url('user/transactions') }}">
                     <span class="nav-icon">
                         <iconify-icon icon="solar:tuning-2-bold-duotone"></iconify-icon>
                     </span>
-                    <span class="nav-text"> المعاملات </span>
+                    <span class="nav-text">  الأحصائيات  </span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/withdraws') }}">
+                <a class="nav-link" href="{{ url('user/withdraws') }}">
                     <span class="nav-icon">
                         <iconify-icon icon="solar:document-text-bold-duotone"></iconify-icon>
                     </span>
@@ -49,11 +58,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/boots') }}">
+                <a class="nav-link" href="{{ url('user/boots') }}">
                     <span class="nav-icon">
                          <iconify-icon icon="solar:ufo-2-bold-duotone"></iconify-icon>
                     </span>
                     <span class="nav-text"> بوتات التيلجرام    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('user/link') }}">
+                    <span class="nav-icon">
+                        <i class="bx bx-link"></i>
+                    </span>
+                    <span class="nav-text"> رابط الاحالة  </span>
                 </a>
             </li>
 
@@ -68,10 +85,10 @@
                 <div class="collapse" id="sidebarSupport">
                     <ul class="nav sub-navbar-nav">
                         <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="{{ url('admin/messages') }}"> جميع الرسائل    </a>
+                            <a class="sub-nav-link" href="{{ url('user/messages') }}"> جميع الرسائل    </a>
                         </li>
                         <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="{{ url('admin/message/add') }}">  اضف رسالة جديدة   </a>
+                            <a class="sub-nav-link" href="{{ url('user/message/add') }}">  اضف رسالة جديدة   </a>
                         </li>
                     </ul>
                 </div>
@@ -87,26 +104,13 @@
                 <div class="collapse" id="sidebarfaq">
                     <ul class="nav sub-navbar-nav">
                         <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="{{ url('admin/faqs') }}"> جميع الاسئلة   </a>
-                        </li>
-                        <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="{{ url('admin/faq/add') }}">   اضف سؤال جديد    </a>
+                            <a class="sub-nav-link" href="{{ url('user/faqs') }}"> جميع الاسئلة   </a>
                         </li>
                     </ul>
                 </div>
             </li>
-            <li class="menu-title mt-2"> اعدادات الموقع </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/public-setting/update') }}">
-                    <span class="nav-icon">
-                        <iconify-icon icon="solar:settings-bold-duotone"></iconify-icon>
-                    </span>
-                    <span class="nav-text"> الاعدادات العامة </span>
-                </a>
-            </li>
-
-            <li class="menu-title mt-2"> المستخدمين</li>
+            <li class="menu-title mt-2"> حسابي  </li>
 
             <li class="nav-item">
                 <a class="nav-link menu-arrow" href="#sidebaradminprofile" data-bs-toggle="collapse" role="button"
@@ -120,37 +124,17 @@
                     <ul class="nav sub-navbar-nav">
 
                         <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="{{ url('admin/update_admin_details') }}"> تعديل البيانات
+                            <a class="sub-nav-link" href="{{ url('user/update_user_details') }}"> تعديل البيانات
                             </a>
                         </li>
                         <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="{{ url('admin/update_admin_password') }}"> تعديل كلمة
+                            <a class="sub-nav-link" href="{{ url('user/update_user_password') }}"> تعديل كلمة
                                 المرور </a>
                         </li>
                     </ul>
                 </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link menu-arrow" href="#sidebarCustomers" data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="sidebarCustomers">
-                    <span class="nav-icon">
-                        <iconify-icon icon="solar:users-group-two-rounded-bold-duotone"></iconify-icon>
-                    </span>
-                    <span class="nav-text"> العملاء </span>
-                </a>
-                <div class="collapse" id="sidebarCustomers">
-                    <ul class="nav sub-navbar-nav">
-
-                        <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="customer-list.html"> جميع العملاء </a>
-                        </li>
-                        <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="customer-detail.html">Details</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
         </ul>
     </div>
 </div>

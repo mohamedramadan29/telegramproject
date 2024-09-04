@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('front.layouts.master')
 @section('title')
      اضافة تذكرة جديدة
 @endsection
@@ -10,9 +10,8 @@
 
         <!-- Start Container Fluid -->
         <div class="container-xxl">
-            <form method="post" action="{{url('admin/message/add')}}" enctype="multipart/form-data">
+            <form method="post" action="{{url('user/message/add')}}" enctype="multipart/form-data" id="newticket">
                 @csrf
-
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 ">
                         @if (Session::has('Success_message'))
@@ -59,13 +58,21 @@
                         <div class="p-3 bg-light mb-3 rounded">
                             <div class="row justify-content-end g-2">
                                 <div class="col-lg-2">
-                                    <button type="submit" class="btn btn-outline-secondary w-100">  حفظ <i class='bx bxs-save'></i> </button>
+                                    <button type="submit" id="submitButton" class="btn btn-outline-secondary w-100">  حفظ <i class='bx bxs-save'></i> </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
+
+            <script>
+                document.getElementById('newticket').addEventListener('submit', function () {
+                    var submitbutton = document.getElementById('submitButton');
+                    submitbutton.disabled = true;
+                    submitbutton.innerHTML = ' جاري الارسال ...'
+                });
+            </script>
         </div>
         <!-- End Container Fluid -->
 
