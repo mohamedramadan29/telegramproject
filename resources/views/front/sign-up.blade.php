@@ -28,13 +28,13 @@
                             <div class="d-flex flex-column h-100 justify-content-center">
                                 <div class="auth-logo mb-4">
                                     <a href="{{url('login')}}" class="logo-dark">
-                                        <img src="{{asset('assets/admin/images/logo-letter.svg')}}" height="24"
-                                             alt="logo dark"> لوجو الموقع
+                                        <img style="width: 70px;height: 70px" src="{{asset('assets/admin/images/logo-letter.svg')}}" height="24" alt="logo dark">
+                                        <h4 style="margin-top: 10px"> مركز وكالات كيوتيكس </h4>
                                     </a>
 
                                     <a href="{{url('login')}}" class="logo-light">
-                                        <img src="{{asset('assets/admin/images/logo-letter.svg')}}" height="24"
-                                             alt="logo light"> لوجو الموقع
+                                        <img style="70px;height: 70px" src="{{asset('assets/admin/images/logo-letter.svg')}}" height="24" alt="logo light">
+                                        <h4 style="margin-top: 10px"> مركز وكالات كيوتيكس </h4>
                                     </a>
                                 </div>
 
