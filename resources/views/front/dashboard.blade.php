@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-8 text-start">
                                     <p class="text-muted mb-0"> عدد الايداعات </p>
-                                    <h3 class="text-dark mt-1 mb-0"> {{number_format($total_depositsـcount,2)}} $ </h3>
+                                    <h3 class="text-dark mt-1 mb-0"> {{number_format($total_deposits_count,2)}} $ </h3>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                 </div> <!-- end col -->
                                 <div class="col-8 text-start">
                                     <p class="text-muted mb-0"> مجموع الايداعات  </p>
-                                    <h3 class="text-dark mt-1 mb-0"> {{number_format($total_desposit_sum,2)}} $ </h3>
+                                    <h3 class="text-dark mt-1 mb-0"> {{number_format($total_deposit_sum,2)}} $ </h3>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                 </div> <!-- end col -->
                                 <div class="col-8 text-start">
                                     <p class="text-muted mb-0"> عدد السحوبات   </p>
-                                    <h3 class="text-dark mt-1 mb-0"> {{ number_format($total_withdrawalsـcount,2) }} $ </h3>
+                                    <h3 class="text-dark mt-1 mb-0"> {{ number_format($total_withdrawals_count,2) }} $ </h3>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                 </div> <!-- end col -->
                                 <div class="col-8 text-start">
                                     <p class="text-muted mb-0">  مجموع السحوبات   </p>
-                                    <h3 class="text-dark mt-1 mb-0"> {{number_format($total_withdrawalsـsum,2)}} $ </h3>
+                                    <h3 class="text-dark mt-1 mb-0"> {{number_format($total_withdrawals_sum,2)}} $ </h3>
                                 </div>
                             </div>
                         </div>

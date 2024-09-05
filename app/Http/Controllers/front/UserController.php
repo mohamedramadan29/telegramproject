@@ -28,27 +28,37 @@ class UserController extends Controller
         $transactions = Transaction::whereIn('trader-id', $tradersIds)
             ->orderBy('id', 'DESC')
             ->get();
-        // حساب إجمالي الرصيد
-        $total_balance = $transactions->sum('balance');//////
-        /// حساب عدد الايداعات
-        $total_depositsـcount = $transactions->sum('deposits-count');
-        /////////////// مجموع الايداعات
-        $total_desposit_sum = $transactions->sum('deposits-sum');
-        /////////// عدد السحويات
-        ///
-        $total_withdrawalsـcount = $transactions->sum('withdrawals-count');
-        /////////////////// مجموع السحوبات
-        ///
-        $total_withdrawalsـsum = $transactions->sum('withdrawals-sum');
-        /////////// حجم التداول
-        ///
-        $turnover_clear = $transactions->sum('turnover-clear');
-        /////////// حصة الشريك
-        ///
-        $vol_share = $transactions->sum('vol-share');
+        // التأكد من أن الأعمدة تحتوي على قيم رقمية (سواء أعداد صحيحة أو كسور)
+        $total_balance = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->balance) ? $transaction->balance : 0;
+        });
 
-        return view('front.dashboard',compact('total_balance','total_depositsـcount','total_desposit_sum',
-            'total_withdrawalsـcount', 'total_withdrawalsـsum','turnover_clear','vol_share'));
+        $total_deposits_count = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->{'deposits-count'}) ? $transaction->{'deposits-count'} : 0;
+        });
+
+        $total_deposit_sum = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->{'deposits-sum'}) ? $transaction->{'deposits-sum'} : 0;
+        });
+
+        $total_withdrawals_count = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->{'withdrawals-count'}) ? $transaction->{'withdrawals-count'} : 0;
+        });
+
+        $total_withdrawals_sum = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->{'withdrawals-sum'}) ? $transaction->{'withdrawals-sum'} : 0;
+        });
+
+        $turnover_clear = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->{'turnover-clear'}) ? $transaction->{'turnover-clear'} : 0;
+        });
+
+        $vol_share = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->{'vol-share'}) ? $transaction->{'vol-share'} : 0;
+        });
+
+        return view('front.dashboard',compact('total_balance','total_deposits_count','total_deposit_sum',
+            'total_withdrawals_count', 'total_withdrawals_sum','turnover_clear','vol_share'));
     }
 
     public function register(Request $request)

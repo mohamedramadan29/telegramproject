@@ -13,7 +13,7 @@
                             <div class="d-flex flex-column h-100 justify-content-center">
                                 <div class="auth-logo mb-4">
                                     <a href="{{url('login')}}" class="logo-dark">
-                                        <img src="{{asset('assets/admin/images/logo-letter.svg')}}" height="24" alt="logo dark"> لوجو الموقع
+                                        <img src="{{asset('assets/admin/images/logo-letter.svg')}}" height="24" alt="logo dark">
                                     </a>
 
                                     <a href="{{url('login')}}" class="logo-light">
@@ -21,7 +21,7 @@
                                     </a>
                                 </div>
 
-                                <h2 class="fw-bold fs-24"> تسجيل دخول  </h2>
+                                <h2 class="fw-bold fs-24"> تسجيل دخول الادمن  </h2>
 
                                 <p class="text-muted mt-1 mb-4"> من فضلك ادخل البريد الالكتروني وكلمة المرور للدخول الي حسابك  </p>
 
@@ -35,8 +35,8 @@
                                                    class="form-control bg-" placeholder=" البريد الالكتروني  ">
                                         </div>
                                         <div class="mb-3">
-                                            <a href="{{url('admin/forget-password')}}"
-                                               class="float-end text-muted text-unline-dashed ms-1"> نسيت كلمة المرور    ؟؟ </a>
+{{--                                            <a href="{{url('admin/forget-password')}}"--}}
+{{--                                               class="float-end text-muted text-unline-dashed ms-1"> نسيت كلمة المرور    ؟؟ </a>--}}
                                             <label class="form-label" for="example-password">كلمة المرور</label>
                                             <input name="password" type="password" id="example-password" class="form-control"
                                                    placeholder="كلمة المرور">
@@ -59,7 +59,7 @@
 {{--                                        <a href="javascript:void(0);" class="btn btn-soft-dark"><i class="bx bxl-google fs-20 me-1"></i> Sign in with Google</a>--}}
 {{--                                        <a href="javascript:void(0);" class="btn btn-soft-primary"><i class="bx bxl-facebook fs-20 me-1"></i> Sign in with Facebook</a>--}}
 {{--                                    </div>--}}
-                                    <p class="text-danger text-center"> ليس لديك حساب ؟   <a href="{{url('admin/sign-up')}}" class="text-dark fw-bold ms-1"> حساب جديد  </a></p>
+{{--                                    <p class="text-danger text-center"> ليس لديك حساب ؟   <a href="{{url('admin/sign-up')}}" class="text-dark fw-bold ms-1"> حساب جديد  </a></p>--}}
 
                                 </div>
                             </div>
