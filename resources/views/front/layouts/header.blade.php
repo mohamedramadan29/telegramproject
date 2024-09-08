@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <!-- Title Meta -->
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title> @yield('title') </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully responsive premium admin dashboard template"/>
@@ -43,41 +43,51 @@
                             <iconify-icon icon="solar:hamburger-menu-broken" class="fs-24 align-middle"></iconify-icon>
                         </button>
                     </div>
-                    @php
-                        $last_balance = 0;
-                        $last_vol = 0;
-                                                $user = \Illuminate\Support\Facades\Auth::user();
-                                                $tradersIds = \App\Models\front\TraderId::where('user_id', \Illuminate\Support\Facades\Auth::id())->pluck('trader_id')->toArray();
-                                                /////// Get All The Transactions Where Trader_id == transaction Trader Id
-                                                ///
-                                                $transactions = \App\Models\admin\Transaction::whereIn('trader-id', $tradersIds)
-                                                    ->orderBy('id', 'DESC')
-                                                    ->get();
-                                                /////////// حصة الشريك
-                                                /// volshare = userbalance
-                                                $vol_share = $transactions->sum('vol-share');
-                                                ////// WithDrawSum Compeleted
-                                                $withdrawSumCompeleted = \App\Models\admin\WithDraw::where('user_id',Auth::id())->where('status',1)->sum('amount');
-                                                $last_vol_share = $vol_share - $withdrawSumCompeleted;
-
-                                                  $issaturday = Carbon\Carbon::now()->isSaturday();
-                                                     if(!$issaturday){
-                                                         $last_vol = $last_vol_share;
-                                                     }else{
-                                                       $last_balance = $last_vol_share;
-                                                     }
-                    @endphp
-
-                            <!-- Menu Toggle Button -->
                     <div class="topbar-item">
-{{--                        <h4 class="fw-bold topbar-button pe-none text-uppercase mb-0"> @yield('title') </h4>--}}
-                        <div class="section_balance" style="margin-top: 30px">
-                            <h5><strong> {{number_format($last_balance,2)}} $ </strong> <a href="{{url('user/withdraws')}}"
-                                                                                           class="btn btn-primary btn-sm">
-                                    سحب <i
-                                            class="bx bx-arrow-from-right"></i> </a></h5>
-                            <p> الارباح :: <strong> {{number_format($last_vol,2)}} $ </strong></p>
+                        <div class="section_balance">
+                            <div class="image_logo">
+                                <img src="{{ asset('assets/admin/images/logo-letter.svg') }}" alt="">
+                            </div>
+                            <div class="image_info">
+                                <h5> Quolink </h5>
+                                <p> مركز وكالات كيوتكس </p>
+                            </div>
                         </div>
+                        <style>
+                            .section_balance{
+                                display: flex;
+                                align-items: center;
+                            }
+                            .section_balance .image_logo{
+                                margin-left: 10px;
+                            }
+
+                            .section_balance .image_info{
+                            }
+                            .section_balance .image_info h5{
+                                font-size: 22px;
+                                margin: 0;
+                                margin-top: 15px;
+                            }
+                            .section_balance .image_info p{
+                                font-size:17px;
+                            }
+                            @media(max-width: 991px){
+                                /*section_balance{*/
+                                /*    align-items:flex-start;*/
+                                /*}*/
+                                .section_balance .image_logo img{
+                                    width:30px;
+                                }
+                                .section_balance .image_info h5{
+                                    font-size: 17px;
+                                    margin-top: 15px;
+                                }
+                                .section_balance .image_info p{
+                                    font-size: 14px;
+                                }
+                            }
+                        </style>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-1">
@@ -93,7 +103,8 @@
                         <a type="button" class="topbar-button" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                                         <span class="d-flex align-items-center">
-                                             <i class='bx bxs-down-arrow'></i> {{\Illuminate\Support\Facades\Auth::user()->email}}
+                                             <i class='bx bxs-down-arrow'></i> <img width="35px"
+                                                                                    src="{{asset('assets/front/images/user.png')}}">
                                         </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -102,11 +113,11 @@
                                 ! </h6>
                             <a class="dropdown-item" href="{{url('user/update_user_details')}}">
                                 <i class="bx bx-user-circle text-muted fs-18 align-middle me-1"></i><span
-                                        class="align-middle"> حسابي  </span>
+                                    class="align-middle"> حسابي  </span>
                             </a>
                             <a class="dropdown-item" href="{{url('user/update_user_password')}}">
                                 <i class="bx bx-message-dots text-muted fs-18 align-middle me-1"></i><span
-                                        class="align-middle"> تغير كلمة المرور  </span>
+                                    class="align-middle"> تغير كلمة المرور  </span>
                             </a>
                             <div class="dropdown-divider my-1"></div>
                             <a class="dropdown-item text-danger" href="{{route('user_logout')}}">

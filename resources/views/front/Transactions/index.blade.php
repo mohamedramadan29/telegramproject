@@ -108,9 +108,9 @@
                                     @foreach($transactions as $transaction)
                                         <tr>
                                             <td>
-                                                <p> {{$transaction['trader-id']}} </p>
-                                                <p> {{$transaction['country']}}  </p>
-                                                <p> {{$transaction['registery-date']}} </p>
+                                                <p style="margin: 0;padding: 0px"> {{$transaction['trader-id']}}</p>
+                                                <p style="margin: 0;padding: 0px"> {{$transaction['country']}}  </p>
+                                                <p style="margin: 0;padding: 0px"> {{$transaction['registery-date']}} </p>
                                             </td>
                                             <td> {{$transaction['balance']}} </td>
                                             <td> {{$transaction['deposits-count']}} </td>
@@ -160,6 +160,9 @@
 
             // تهيئة DataTables من جديد
             $('#table-search').DataTable({
+                "searching": false, // إلغاء البحث
+                "ordering": false,  // إلغاء الترتيب
+                "lengthChange": false,
                 "language": {
                     "search": "بحث:",
                     "lengthMenu": "عرض _MENU_ عناصر لكل صفحة",
@@ -176,3 +179,9 @@
         });
     </script>
 @endsection
+
+<style>
+    table.dataTable tbody th, table.dataTable tbody td{
+        padding: 1px 5px !important;
+    }
+</style>

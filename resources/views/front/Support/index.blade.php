@@ -120,6 +120,9 @@
 
             // تهيئة DataTables من جديد
             $('#table-search').DataTable({
+                "searching": false, // إلغاء البحث
+                "ordering": false,  // إلغاء الترتيب
+                "lengthChange": false,
                 "language": {
                     "search": "بحث:",
                     "lengthMenu": "عرض _MENU_ عناصر لكل صفحة",

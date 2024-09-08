@@ -5,6 +5,8 @@
 @section('css')
     {{--    <!-- DataTables CSS -->--}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+
 @endsection
 @section('content')
     <!-- ==================================================== -->
@@ -33,19 +35,19 @@
                         </div>
                         <div class="card-body my_balance">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-lg-4 col-12">
                                     <div class="info">
                                         <h5> الرصيد الكلي </h5>
                                         <p>  {{number_format($last_vol_share,2)}} $</p>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-lg-4 col-12">
                                     <div class="info">
                                         <h5> طلبت السحب الحالية </h5>
                                         <p> {{ number_format($withdrawSum,2) }} $ </p>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-lg-4 col-12">
                                     <div class="info">
                                         <h5> مجموع السحوبات </h5>
                                         <p> {{ number_format($withdrawSumCompeleted,2) }} $ </p>
@@ -200,6 +202,9 @@
 
             // تهيئة DataTables من جديد
             $('#table-search').DataTable({
+                "searching": false, // إلغاء البحث
+                "ordering": false,  // إلغاء الترتيب
+                "lengthChange": false,
                 "language": {
                     "search": "بحث:",
                     "lengthMenu": "عرض _MENU_ عناصر لكل صفحة",
@@ -216,3 +221,15 @@
         });
     </script>
 @endsection
+
+<style>
+    @media (max-width: 991px){
+        .my_balance .info{
+            padding: 2px !important;
+            margin-bottom: 10px;
+        }
+        .my_balance .info h5{
+            font-size: 18px !important;
+        }
+    }
+</style>

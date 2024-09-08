@@ -17568,7 +17568,7 @@ html[data-menu-size=hidden] .topbar {
 
 @media (max-width: 375px) {
     .topbar {
-        padding: 0 0.75rem !important;
+        padding: 0 !important;
     }
 }
 
