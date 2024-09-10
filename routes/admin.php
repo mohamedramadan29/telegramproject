@@ -79,9 +79,9 @@ Route::group(['prefix' => 'admin'], function () {
         });
         ///////////////// Start Public Settings
         ///
-        Route::controller(PublicSettingController::class)->group(function () {
-            Route::match(['post', 'get'], 'public-setting/update', 'update');
-        });
+        // Route::controller(PublicSettingController::class)->group(function () {
+        //     Route::match(['post', 'get'], 'public-setting/update', 'update');
+        // });
 
 
     });

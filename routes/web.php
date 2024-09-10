@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\front\UserController;
 use App\Http\Controllers\front\TraderIdController;
 Route::get('/', function () {
-    return view('front.login');
+    return view('front.login')->name('login');
 });
+Route::get('/login', function () {
+    return view('front.login');
+})->name('login');
 Route::group(['prefix' => 'user'], function () {
 // user Login
     Route::controller(UserController::class)->group(function () {
