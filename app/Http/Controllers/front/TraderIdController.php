@@ -8,6 +8,7 @@ use App\Models\admin\Boot;
 use App\Models\front\TraderId;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,9 +50,16 @@ class TraderIdController extends Controller
                 // إزالة أي أحرف غير رقمية من trader_id
                 $cleanedTraderId = preg_replace('/\D/', '', $request->input('trader_id'));
                 $trader_id = new TraderId();
+              DB::beginTransaction();
                 $trader_id->user_id = Auth::id();
                 $trader_id->trader_id = $cleanedTraderId;
                 $trader_id->save();
+                ////////// Insert Into New TradersTest
+                ///
+                DB::table('traderstest')->insert([
+                    'trader_id'=>$cleanedTraderId,
+                ]);
+                DB::commit();
                 return $this->success_message(' تم اضافة رمز تعريفي جديد خاص بك وفي انتظار المراجعة  ');
             } catch (\Exception $e) {
                 return $this->exception_message($e);

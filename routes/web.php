@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\front\UserController;
 use App\Http\Controllers\front\TraderIdController;
 Route::get('/', function () {
-    return view('front.login')->name('login');
-});
+    return view('front.login');
+})->name('login');
 Route::get('/login', function () {
     return view('front.login');
 })->name('login');
