@@ -30,27 +30,21 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title flex-grow-1"> اضافة Id جديد  </h4>
-                                </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="my_balance mb-3">
-                                                <div class="info">
-                                                    <h5>  اضافة Id جديد   </h5>
-                                                </div>
-                                            </div>
                                             <form method="post" action="{{url('user/trader-id/add')}}">
                                                 @csrf
-                                                <div class="mb-3">
-                                                    <label for="" class="mb-2"> ادخل ال Id </label>
-                                                    <input type="number" class="form-control" value="" name="trader_id">
+                                                <div class="d-flex">
+                                                    <div class="mb-3" style="width:80%">
+                                                        <input type="number" class="form-control" value="" name="trader_id" placeholder="ادخل ال Id">
+                                                    </div>
+                                                    <div class="mb-3" style="width:20%">
+                                                        <button type="submit" class="btn btn-primary">  اضافة
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <button type="submit" class="btn btn-primary">  اضافة
-                                                    </button>
-                                                </div>
+
                                             </form>
                                         </div>
                                     </div>
@@ -157,11 +151,10 @@
             if ($.fn.DataTable.isDataTable('#table-search')) {
                 $('#table-search').DataTable().destroy(); // تدمير التهيئة السابقة
             }
-
             // تهيئة DataTables من جديد
             $('#table-search').DataTable({
                 "searching": false, // إلغاء البحث
-                "ordering": false,  // إلغاء الترتيب
+                "ordering": true,  // إلغاء الترتيب
                 "lengthChange": false,
                 "language": {
                     "search": "بحث:",

@@ -83,16 +83,23 @@
                     <div class="card">
                         @php
 
-                        $issaturday = Carbon\Carbon::now()->isSaturday();
+                       // $issaturday = Carbon\Carbon::now()->isSaturday();
 
                                 @endphp
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
                             <h4 class="card-title flex-grow-1"> طلبات السحب </h4>
-                            <button @if(!$issaturday) disabled @endif type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+{{--                            <button @if(!$issaturday) disabled @endif type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"--}}
+{{--                                    data-bs-target="#add_attribute">--}}
+{{--                                اضافة طلب جديد--}}
+{{--                                <i class="ti ti-plus"></i>--}}
+{{--                            </button>--}}
+
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#add_attribute">
                                 اضافة طلب جديد
                                 <i class="ti ti-plus"></i>
                             </button>
+
                             @include('front.WithDraws.add')
                         </div>
 
