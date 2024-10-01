@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
     use Message_Trait;
+
     public function index()
     {
         $user = Auth::user();
@@ -57,16 +59,40 @@ class UserController extends Controller
             return is_numeric($transaction->{'vol-share'}) ? $transaction->{'vol-share'} : 0;
         });
 
-        return view('front.dashboard',compact('total_balance','total_deposits_count','total_deposit_sum',
-            'total_withdrawals_count', 'total_withdrawals_sum','turnover_clear','vol_share'));
+        return view('front.dashboard', compact('total_balance', 'total_deposits_count', 'total_deposit_sum',
+            'total_withdrawals_count', 'total_withdrawals_sum', 'turnover_clear', 'vol_share'));
     }
 
     public function register(Request $request)
     {
+//        $referral_code = $request->query('ref');
+//        if(isset($referral_code)){
+//            $referring_user = User::where('referral_code', $referral_code)->first();
+//            $referring_level = $referring_user['level_id'];
+//        }else{
+//            $referring_level = null;
+//        }
         if ($request->isMethod('post')) {
             try {
+                // تأكيد ما إذا كان التسجيل يتم باستخدام كود إحالة
+                $referral_code = $request->input('referral_code');
+                $referring_user = null;
+                $referring_level = null;
+
+                if ($referral_code) {
+                    // ابحث عن المستخدم الذي يملك كود الإحالة
+                    $referring_user = User::where('referral_code', $referral_code)->first();
+
+                    // إذا كان هناك مستخدم صاحب كود الإحالة، حدد المستوى الخاص به
+                    if ($referring_user) {
+                        $referring_level = $referring_user['level_id'];
+                    }
+                }
+               // dd($referring_user->id );
+                // ابحث عن المستخدم الذي يملك كود الإحالة
                 DB::beginTransaction();
                 $data = $request->all();
+                // dd($data);
                 $email = $data['email'];
                 $checkUseremail = User::where('email', $email)->count();
                 if ($checkUseremail > 0) {
@@ -96,6 +122,9 @@ class UserController extends Controller
                     'name' => $data['name'],
                     'email' => $data['email'],
                     'password' => Hash::make($data['password']),
+                    'referral_code' => Str::random(10),
+                    'referred_by' => $referring_user ? $referring_user->id : null,
+                    'referred_by_level'=>$referring_level,
                 ]);
                 ////////////////////// Send Confirmation Email ///////////////////////////////
                 ///
@@ -334,14 +363,14 @@ class UserController extends Controller
         try {
             $data = $request->all();
             $trader_id = $data['trader_id'];
-            $user_traders_count = User::where('trader_id',$trader_id)->count();
-            if ($user_traders_count > 0){
+            $user_traders_count = User::where('trader_id', $trader_id)->count();
+            if ($user_traders_count > 0) {
                 return Redirect::back()->withInput()->withErrors(' تم استخدام هذا الرمز التعريفي من قبل  ');
             }
             $user->trader_id = $data['trader_id'];
             $user->save();
             return $this->success_message(' تم اضافة الرمز التعريفي الخاص بك بنجاح شاهد عملياتك الان  ');
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->exception_message($e);
         }
     }

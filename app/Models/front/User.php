@@ -3,6 +3,7 @@
 namespace App\Models\front;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\admin\Level;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +23,12 @@ class User extends Authenticatable
         'email',
         'password',
         'country',
-        'trader_id'
+        'trader_id',
+        'referral_code',
+        'referred_by',
+        'level_id',
+        'referred_by_level',
+        'bonus_received'
     ];
 
     /**
@@ -44,4 +50,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class,'referred_by');
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class,'level_id');
+    }
 }

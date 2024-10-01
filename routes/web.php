@@ -3,12 +3,14 @@
 use App\Http\Controllers\front\BootController;
 use App\Http\Controllers\front\FaqController;
 use App\Http\Controllers\front\MessageReplay;
+use App\Http\Controllers\front\ReferalController;
 use App\Http\Controllers\front\SupportController;
+use App\Http\Controllers\front\TraderIdController;
 use App\Http\Controllers\front\TransactionController;
+use App\Http\Controllers\front\UserController;
 use App\Http\Controllers\front\WithDrawController;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\front\UserController;
-use App\Http\Controllers\front\TraderIdController;
+
 Route::get('/', function () {
     return view('front.login');
 })->name('login');
@@ -98,6 +100,11 @@ Route::group(['prefix' => 'user'], function () {
         });
         Route::view('link','front.links.index');
 
+        ////////////// Start Referal
+        ///
+        Route::controller(ReferalController::class)->group(function (){
+            Route::get('referrals','index');
+        });
     });
 });
 

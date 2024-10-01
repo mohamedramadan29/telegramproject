@@ -8,6 +8,7 @@ use \App\Http\Controllers\admin\BootController;
 use \App\Http\Controllers\admin\SupportController;
 use \App\Http\Controllers\admin\FaqController;
 use \App\Http\Controllers\admin\MessageReplay;
+use \App\Http\Controllers\admin\LevelController;
 Route::group(['prefix' => 'admin'], function () {
     // Admin Login
 
@@ -83,6 +84,12 @@ Route::group(['prefix' => 'admin'], function () {
         //     Route::match(['post', 'get'], 'public-setting/update', 'update');
         // });
 
+        Route::controller(LevelController::class)->group(function (){
+            Route::get('levels','index');
+            Route::match(['post','get'],'level/add','store');
+            Route::match(['post','get'],'level/update/{id}','update');
+            Route::post('level/delete/{id}','delete');
+        });
 
     });
 });

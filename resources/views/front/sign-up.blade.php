@@ -80,6 +80,8 @@
                                                     والاحكام </label>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="referral_code" value="{{ request('ref') }}">
+
                                         <div class="mb-1 text-center d-grid">
                                             <button class="btn btn-soft-primary" type="submit" id="submitButton"> حساب
                                                 جديد

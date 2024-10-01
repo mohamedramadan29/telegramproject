@@ -73,6 +73,14 @@
                     <span class="nav-text"> رابط الاحالة  </span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('user/referrals') }}">
+                    <span class="nav-icon">
+                        <i class="bx bx-link"></i>
+                    </span>
+                    <span class="nav-text"> نظام الاحالات   </span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link menu-arrow" href="#sidebarSupport" data-bs-toggle="collapse" role="button"

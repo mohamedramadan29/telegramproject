@@ -57,6 +57,17 @@
                 </a>
             </li>
 
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/levels') }}">
+                    <span class="nav-icon">
+                         <iconify-icon icon="solar:ufo-2-bold-duotone"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> مستويات الاحالات   </span>
+                </a>
+            </li>
+
+
             <li class="nav-item">
                 <a class="nav-link menu-arrow" href="#sidebarSupport" data-bs-toggle="collapse" role="button"
                    aria-expanded="false" aria-controls="sidebarSupport">
