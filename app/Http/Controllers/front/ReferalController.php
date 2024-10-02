@@ -1,24 +1,19 @@
 <?php
-
 namespace App\Http\Controllers\front;
-
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Models\admin\Level;
 use App\Models\admin\Transaction;
 use App\Models\front\TraderId;
 use Illuminate\Support\Facades\Auth;
-
 class ReferalController extends Controller
 {
     use Message_Trait;
-
     public function index()
     {
         $user = Auth::user();
         // جلب جميع الإحالات المرتبطة بهذا المستخدم
         $referrals = $user->referrals;
-
         // تقسيم الإحالات حسب المستوى الذي كان فيه المستخدم عند تسجيلهم
         $referrals_by_level = $referrals->groupBy('referred_by_level');
         //dd($referrals_by_level);
@@ -42,18 +37,15 @@ class ReferalController extends Controller
             //dd($percentage);
             // حساب الربح الخاص بالمجموعة وجمعه مع الإجمالي
             $volshare_total += $group_transaction_total * ($percentage / 100); // تحويل النسبة إلى نسبة عشرية
-
             // جمع حجم التداول الإجمالي لهذه المجموعة
             $transaction_total += $group_transaction_total;
         }
-
         // بعد حساب إجمالي حجم التداول، تحديد المستوى الجديد للمستخدم
         $bonus = 0; // متغير لحفظ المكافأة
         if ($transaction_total > 0) {
             $current_level = Level::where('turnover', '<=', $transaction_total)
                 ->orderBy('turnover', 'desc')
                 ->first();
-
             if ($current_level) {
                 // احفظ المستوى الجديد إذا كان مختلفًا
                 if ($user->level_id != $current_level->id) {

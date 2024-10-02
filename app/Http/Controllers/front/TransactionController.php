@@ -34,6 +34,7 @@ class TransactionController extends Controller
         // حساب النسبة المئوية المتبقية للوصول إلى المستوى التالي
         $percentage_level_to_complete = 0; // الافتراضي 0 في حالة عدم وجود مستوى أعلى
 
+        $current_progress = 0 ;
 
         if ($next_level) {
             // حساب الفرق بين المستوى الحالي والمستوى التالي
