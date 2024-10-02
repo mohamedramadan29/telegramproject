@@ -30,31 +30,31 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
+                                <div class="progress" role="progressbar" aria-label="Warning example striped"
+                                     aria-valuenow="{{$current_progress}}" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-striped text-bg-warning" style="width: {{$current_progress}}%">{{$current_progress}}%</div>
+                                </div>
+
+
+                                <div class="count_level d-flex">
+                                    <div class="info_count">
+                                        <h6> مستوي الحساب </h6>
+                                        <p> {{$current_level['name']}} </p>
+                                    </div>
+                                    <div class="info_count">
+                                        <h6> نسبة الربح </h6>
+                                        <p> {{ number_format($current_level['percent_volshare'],2)}} ٪ </p>
+                                    </div>
+                                    <div class="info_count">
+                                        <h6> هدايا الحساب </h6>
+                                        <p> {{ number_format($current_level['Bonus'],2)}} $ </p>
+                                    </div>
+                                    <div class="info_count">
+                                        <h6> مجموع الارباح </h6>
+                                        <p> {{ number_format($profit,2)}} $ </p>
+                                    </div>
+                                </div>
                                 <div class="card-body">
-                                    <div class="progress" role="progressbar" aria-label="Warning example striped"
-                                         aria-valuenow="{{$current_progress}}" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar progress-bar-striped text-bg-warning" style="width: {{$current_progress}}%">{{$current_progress}}%</div>
-                                    </div>
-
-
-                                    <div class="count_level d-flex">
-                                        <div class="info_count">
-                                            <h6> مستوي الحساب </h6>
-                                            <p> {{$current_level['name']}} </p>
-                                        </div>
-                                        <div class="info_count">
-                                            <h6> نسبة الربح </h6>
-                                            <p> {{ number_format($current_level['percent_volshare'],2)}} ٪ </p>
-                                        </div>
-                                        <div class="info_count">
-                                            <h6> هدايا الحساب </h6>
-                                            <p> {{ number_format($current_level['Bonus'],2)}} $ </p>
-                                        </div>
-                                        <div class="info_count">
-                                            <h6> مجموع الارباح </h6>
-                                            <p> {{ number_format($profit,2)}} $ </p>
-                                        </div>
-                                    </div>
                                     <style>
                                         .progress, .progress-stacked{
                                             height: 1.4rem !important;

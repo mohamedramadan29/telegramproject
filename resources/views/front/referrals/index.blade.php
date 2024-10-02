@@ -68,19 +68,43 @@
                             </div>
                             <!-- end table-responsive -->
                             <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                                <h4 class="card-title flex-grow-1"> المستخدمين  </h4>
-                                <h4 class="card-title flex-grow-1"> مجموع حجم التداول للمستخدمين :: {{$transaction_total}}  $   </h4>
-                                <h4 class="card-title flex-grow-1">
-                                    المستوي الحالي ::
-                                    @if (isset(Auth::user()->level) && Auth::user()->level->name)
-                                        {{ Auth::user()->level->name }}
-                                    @else
-                                        بدون مستوي
-                                    @endif
-                                </h4>
-                                <h4 class="card-title flex-grow-1"> حصة الشريك  ::{{$volshare_total}} $ </h4>
-                                <h4 class="card-title flex-grow-1">مجموع الارباح  ::{{Auth::user()->earnings}} $ </h4>
+
+{{--                                <h4 class="card-title flex-grow-1"> مجموع حجم التداول للمستخدمين :: {{$transaction_total}}  $   </h4>--}}
+{{--                                <h4 class="card-title flex-grow-1">--}}
+{{--                                    المستوي الحالي ::--}}
+{{--                                    @if (isset(Auth::user()->level) && Auth::user()->level->name)--}}
+{{--                                        {{ Auth::user()->level->name }}--}}
+{{--                                    @else--}}
+{{--                                        بدون مستوي--}}
+{{--                                    @endif--}}
+{{--                                </h4>--}}
+{{--                                <h4 class="card-title flex-grow-1"> حصة الشريك  ::{{$volshare_total}} $ </h4>--}}
+{{--                                <h4 class="card-title flex-grow-1">مجموع الارباح  ::{{Auth::user()->earnings}} $ </h4>--}}
                             </div>
+                            <h4 class="card-title flex-grow-1"> المستخدمين  </h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>  مجموع حجم التداول للمستخدمين  </th>
+                                    <th> المستوي الحالي </th>
+                                    <th> حصة الشريك </th>
+                                    <th> مجموع الارباح </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td> {{$transaction_total}}  $  </td>
+                                    <td>    @if (isset(Auth::user()->level) && Auth::user()->level->name)
+                                            {{ Auth::user()->level->name }}
+                                        @else
+                                            بدون مستوي
+                                        @endif
+                                    </td>
+                                    <td> {{$volshare_total}} $ </td>
+                                    <td> {{Auth::user()->earnings}} $ </td>
+                                </tr>
+                                </tbody>
+                            </table>
                             <div class="table-responsive">
                                 <table
                                     class="table table-bordered gridjs-table align-middle mb-0 table-hover table-centered">
