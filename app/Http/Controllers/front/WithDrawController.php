@@ -4,6 +4,7 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
+use App\Models\admin\Level;
 use App\Models\admin\Transaction;
 use App\Models\admin\WithDraw;
 use App\Models\front\TraderId;
@@ -22,12 +23,34 @@ class WithDrawController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $user_earning = $user['earnings'];
         $tradersIds = TraderId::where('user_id', Auth::id())->pluck('trader_id')->toArray();
         /////// Get All The Transactions Where Trader_id == transaction Trader Id
         ///
         $transactions = Transaction::whereIn('trader-id', $tradersIds)
             ->orderBy('id', 'DESC')
             ->get();
+
+        $turnover_sum = $transactions->sum('turnover-clear');
+        $current_level = Level::where('turnover', '<=', $turnover_sum)
+            ->orderBy('turnover', 'desc')
+            ->first();
+
+        // حساب الربح بناءً على نسبة مستوى الربح
+        $profit = 0;
+        if ($current_level && isset($current_level['percent_volshare'])) {
+            // حساب الربح بناءً على نسبة الربح من حجم التداول
+            $profit = (($current_level['percent_volshare'] / 100) * $turnover_sum) + $current_level['Bonus'] ;
+            $profit_without_bouns = ($current_level['percent_volshare'] / 100) * $turnover_sum;
+
+        }
+
+        $level_bouns = $current_level['Bonus'];
+        $allbalance = floatval($profit + $user_earning);
+        $total_balance = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->balance) ? $transaction->balance : 0;
+        });
+
         /////////// حصة الشريك
         /// volshare = userbalance
         $vol_share = $transactions->sum('vol-share');
@@ -37,13 +60,14 @@ class WithDrawController extends Controller
         $withdrawSum = WithDraw::where('user_id',Auth::id())->where('status',0)->sum('amount');
         ////// WithDrawSum Compeleted
         $withdrawSumCompeleted = WithDraw::where('user_id',Auth::id())->where('status',1)->sum('amount');
-        $last_vol_share = $vol_share - $withdrawSumCompeleted;
+        $last_vol_share = $allbalance - $withdrawSumCompeleted;
         return view('front.WithDraws.index',compact('withdraws','last_vol_share','withdrawSum','withdrawSumCompeleted'));
     }
 
     public function store(Request $request)
     {
         $user = Auth::user();
+        $user_earning = $user['earnings'];
         $tradersIds = TraderId::where('user_id', Auth::id())->pluck('trader_id')->toArray();
         /////// Get All The Transactions Where Trader_id == transaction Trader Id
         ///
@@ -52,11 +76,34 @@ class WithDrawController extends Controller
             ->get();
         /////////// حصة الشريك
         /// volshare = userbalance
+        $turnover_sum = $transactions->sum('turnover-clear');
+        $current_level = Level::where('turnover', '<=', $turnover_sum)
+            ->orderBy('turnover', 'desc')
+            ->first();
+
+        // حساب الربح بناءً على نسبة مستوى الربح
+        $profit = 0;
+        if ($current_level && isset($current_level['percent_volshare'])) {
+            // حساب الربح بناءً على نسبة الربح من حجم التداول
+            $profit = (($current_level['percent_volshare'] / 100) * $turnover_sum) + $current_level['Bonus'] ;
+            $profit_without_bouns = ($current_level['percent_volshare'] / 100) * $turnover_sum;
+
+        }
+
+        $level_bouns = $current_level['Bonus'];
+        $allbalance = floatval($profit + $user_earning);
+        $total_balance = $transactions->sum(function ($transaction) {
+            return is_numeric($transaction->balance) ? $transaction->balance : 0;
+        });
+
+
         $vol_share = $transactions->sum('vol-share');
         ////// WithDrawSum Compeleted
         $withdrawSumCompeleted = WithDraw::where('user_id',Auth::id())->where('status',1)->sum('amount');
-        $last_vol_share = $vol_share - $withdrawSumCompeleted;
-
+        $withdrawSumPending = WithDraw::where('user_id',Auth::id())->where('status',0)->sum('amount');
+        //dd($withdrawSumPending);
+        $last_vol_share = $allbalance - $withdrawSumCompeleted;
+        $last_vol_share_new = $allbalance - ($withdrawSumPending + $withdrawSumCompeleted);
         try {
             $data = $request->all();
             $rules = [
@@ -71,12 +118,12 @@ class WithDrawController extends Controller
             if ($validator->fails()) {
                 return Redirect::back()->withInput()->withErrors($validator);
             }
-            if ($last_vol_share < $data['amount']) {
+            if ($last_vol_share_new < $data['amount']) {
                 return Redirect::back()->withInput()->withErrors('رصيدك الحالي لا يكفي لاجراء طلب السحب ');
             }
-            if ($data['amount'] < 50) {
-                return Redirect::back()->withInput()->withErrors(' اقل مبلغ للسحب هو 20 دولار  ');
-            }
+//            if ($data['amount'] < 50) {
+//                return Redirect::back()->withInput()->withErrors(' اقل مبلغ للسحب هو 20 دولار  ');
+//            }
             DB::beginTransaction();
             $withdraw = new WithDraw();
             $withdraw->user_id = Auth::id();

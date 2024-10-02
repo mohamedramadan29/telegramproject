@@ -14,8 +14,8 @@
                         <input class="form-control" type="text" disabled readonly value="{{\Illuminate\Support\Facades\Auth::user()->name}}">
                     </div>
                     <div class="mb-3">
-                        <label for="">المبلغ <span class="badge badge-danger bg-danger"> اقل مبلغ للحسب هو 50 دولار </span> </label>
-                        <input required type="number" min="20" name="amount" class="form-control" placeholder="المبلغ "
+                        <label for="">المبلغ   </label>
+                        <input required type="number"   name="amount" class="form-control" placeholder="المبلغ "
                                value="">
                     </div>
                     <div class="mb-3">

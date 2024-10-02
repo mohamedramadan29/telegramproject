@@ -31,16 +31,79 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
+                                    <div class="progress" role="progressbar" aria-label="Warning example striped"
+                                         aria-valuenow="{{$current_progress}}" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-striped text-bg-warning" style="width: {{$current_progress}}%">{{$current_progress}}%</div>
+                                    </div>
+
+
+                                    <div class="count_level d-flex">
+                                        <div class="info_count">
+                                            <h6> مستوي الحساب </h6>
+                                            <p> {{$current_level['name']}} </p>
+                                        </div>
+                                        <div class="info_count">
+                                            <h6> نسبة الربح </h6>
+                                            <p> {{ number_format($current_level['percent_volshare'],2)}} ٪ </p>
+                                        </div>
+                                        <div class="info_count">
+                                            <h6> هدايا الحساب </h6>
+                                            <p> {{ number_format($current_level['Bonus'],2)}} $ </p>
+                                        </div>
+                                        <div class="info_count">
+                                            <h6> مجموع الارباح </h6>
+                                            <p> {{ number_format($profit,2)}} $ </p>
+                                        </div>
+                                    </div>
+                                    <style>
+                                        .progress, .progress-stacked{
+                                            height: 1.4rem !important;
+                                            margin-bottom: 15px;
+                                            font-size: 16px;
+                                            font-weight: bold;
+                                        }
+                                        .count_level{
+                                            align-items: center;
+                                            flex-wrap: wrap;
+                                            justify-content: center;
+                                            padding-bottom: 10px;
+                                        }
+                                        .info_count{
+                                            margin: 10px;
+                                            background: #f1eded;
+                                            padding: 10px;
+                                            border-radius: 9px;
+                                            text-align: center;
+                                            border: 1px solid #ccc;
+                                            min-width: 170px;
+                                        }
+                                        @media(max-width: 991px){
+                                            .info_count{
+                                                min-width: 110px
+                                            }
+                                        }
+                                        .info_count h6{
+                                            padding-top: 10px;
+                                            font-size: 16px;
+                                            font-weight: bold;
+                                        }
+                                        .info_count p{
+                                            font-weight: bold;
+                                            font-size: 19px;
+                                            color: #E6612A;
+                                        }
+                                    </style>
                                     <div class="row">
                                         <div class="col-12">
                                             <form method="post" action="{{url('user/trader-id/add')}}">
                                                 @csrf
                                                 <div class="d-flex">
                                                     <div class="mb-3" style="width:80%">
-                                                        <input type="number" class="form-control" value="" name="trader_id" placeholder="ادخل ال Id">
+                                                        <input type="number" class="form-control" value=""
+                                                               name="trader_id" placeholder="ادخل ال Id">
                                                     </div>
                                                     <div class="mb-3" style="width:20%">
-                                                        <button type="submit" class="btn btn-primary">  اضافة
+                                                        <button type="submit" class="btn btn-primary"> اضافة
                                                         </button>
                                                     </div>
                                                 </div>
@@ -85,6 +148,17 @@
                             <div class="table-responsive">
                                 <table id="table-search"
                                        class="table table-bordered gridjs-table align-middle mb-0 table-hover table-centered">
+                                    <tfoot>
+                                    <tr>
+                                        <td style="color: #FE6C2F"> <strong> {{$transactions->count()}}  </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_balance}}  $</strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_deposits_count}}  </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_deposit_sum}} $ </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_withdrawals_count}}  </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_withdrawals_sum}} $  </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$turnover_clear}} $ </strong></td>
+                                    </tr>
+                                    </tfoot>
                                     <thead class="bg-light-subtle">
                                     <tr>
                                         <th> المعرف (id)</th>
@@ -94,8 +168,8 @@
                                         <th> عدد السحوبات</th>
                                         <th> مجموع السحوبات</th>
                                         <th> حجم التداول</th>
-                                        <th> حصة الشريك</th>
-                                        <th> حالة الحساب  </th>
+                                        {{--                                        <th> حصة الشريك</th>--}}
+                                        <th> حالة الحساب</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -112,12 +186,12 @@
                                             <td> {{$transaction['withdrawals-count']}} </td>
                                             <td> {{$transaction['withdrawals-sum']}} </td>
                                             <td> {{$transaction['turnover-clear']}} </td>
-                                            <td> {{$transaction['vol-share']}} </td>
+                                            {{--                                            <td> {{$transaction['vol-share']}} </td>--}}
                                             <td> @if($transaction['is-closed'] == 0)
-                                                     <span class="badge badge-outline-success"> فعال </span>
+                                                    <span class="badge badge-outline-success"> فعال </span>
                                                 @else
-                                                     <span class="badge badge-outline-danger"> غير فعال </span>
-                                            @endif </td>
+                                                    <span class="badge badge-outline-danger"> غير فعال </span>
+                                                @endif </td>
                                         </tr>
                                     @endforeach
 
@@ -174,7 +248,7 @@
 @endsection
 
 <style>
-    table.dataTable tbody th, table.dataTable tbody td{
+    table.dataTable tbody th, table.dataTable tbody td {
         padding: 1px 5px !important;
     }
 </style>

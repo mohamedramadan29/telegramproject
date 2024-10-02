@@ -5,6 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Models\admin\Admin;
+use App\Models\admin\Level;
 use App\Models\admin\Transaction;
 use App\Models\front\TraderId;
 use App\Models\front\User;
@@ -24,6 +25,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $user_earning = $user['earnings'];
         $tradersIds = TraderId::where('user_id', Auth::id())->pluck('trader_id')->toArray();
         /////// Get All The Transactions Where Trader_id == transaction Trader Id
         ///
@@ -31,6 +33,25 @@ class UserController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
         // التأكد من أن الأعمدة تحتوي على قيم رقمية (سواء أعداد صحيحة أو كسور)
+
+
+        //  $turnover_sum = $transactions['turnover-clear']->sum();
+        $turnover_sum = $transactions->sum('turnover-clear');
+        $current_level = Level::where('turnover', '<=', $turnover_sum)
+            ->orderBy('turnover', 'desc')
+            ->first();
+
+        // حساب الربح بناءً على نسبة مستوى الربح
+        $profit = 0;
+        if ($current_level && isset($current_level['percent_volshare'])) {
+            // حساب الربح بناءً على نسبة الربح من حجم التداول
+            $profit = (($current_level['percent_volshare'] / 100) * $turnover_sum) + $current_level['Bonus'] ;
+            $profit_without_bouns = ($current_level['percent_volshare'] / 100) * $turnover_sum;
+
+        }
+
+        $level_bouns = $current_level['Bonus'];
+        $allbalance = floatval($profit + $user_earning);
         $total_balance = $transactions->sum(function ($transaction) {
             return is_numeric($transaction->balance) ? $transaction->balance : 0;
         });
@@ -59,8 +80,15 @@ class UserController extends Controller
             return is_numeric($transaction->{'vol-share'}) ? $transaction->{'vol-share'} : 0;
         });
 
+
+        $withdrawSumCompeleted = \App\Models\admin\WithDraw::where('user_id',Auth::id())->where('status',1)->sum('amount');
+
+        ///// Last Main Balance For User
+
+        $last_main_price = $allbalance - $withdrawSumCompeleted;
         return view('front.dashboard', compact('total_balance', 'total_deposits_count', 'total_deposit_sum',
-            'total_withdrawals_count', 'total_withdrawals_sum', 'turnover_clear', 'vol_share'));
+            'total_withdrawals_count', 'total_withdrawals_sum', 'turnover_clear', 'vol_share','profit','profit_without_bouns'
+            ,'user_earning','allbalance','level_bouns','current_level','last_main_price'));
     }
 
     public function register(Request $request)

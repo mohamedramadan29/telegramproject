@@ -10,7 +10,7 @@ use App\Http\Controllers\front\TransactionController;
 use App\Http\Controllers\front\UserController;
 use App\Http\Controllers\front\WithDrawController;
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\front\LevelController;
 Route::get('/', function () {
     return view('front.login');
 })->name('login');
@@ -104,6 +104,11 @@ Route::group(['prefix' => 'user'], function () {
         ///
         Route::controller(ReferalController::class)->group(function (){
             Route::get('referrals','index');
+        });
+        ///////////// Start show Levels
+        ///
+        Route::controller(LevelController::class)->group(function (){
+           Route::get('levels','index');
         });
     });
 });
