@@ -54,8 +54,6 @@ class LevelController extends Controller
            // حساب الربح بناءً على نسبة الربح من حجم التداول
            $profit = (($current_level['percent_volshare'] / 100) * $turnover_sum) + $current_level['Bonus'] ;
        }
-
-
-       return view('front.Levels.index',compact('levels','current_level','current_progress','profit'));
+       return view('front.Levels.index',compact('levels','current_level','current_progress','profit','next_level','turnover_sum'));
    }
 }

@@ -29,7 +29,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                            <h4 class="card-title flex-grow-1"> رابط الاحالة </h4>
+                            <h4 class="card-title flex-grow-1"> قم بدعوة الاصدقاء الى منصه Quotex واحصل على نسبه ارباح على حجم التداول الكلي المتداولين .عن طريق مشاركه رابط الاحاله الخاص بك </h4>
                         </div>
 
 

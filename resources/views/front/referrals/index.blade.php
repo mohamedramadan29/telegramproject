@@ -29,7 +29,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                            <h4 class="card-title flex-grow-1"> رابط الاحالة </h4>
+                            <h4 class="card-title flex-grow-1"> قم بدعوة الاصدقاء الى مركز وكالات كيوتيكس واحصل على نسبه ارباح على حجم التداول الكلي عن طريق مشاركه رابط الاحاله الخاص بك  </h4>
                         </div>
 
 
@@ -87,8 +87,8 @@
                                 <tr>
                                     <th>  مجموع حجم التداول للمستخدمين  </th>
                                     <th> المستوي الحالي </th>
-                                    <th> حصة الشريك </th>
-                                    <th> مجموع الارباح </th>
+                                    <th>ربحك  </th>
+                                    <th> بونص </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -114,7 +114,7 @@
                                         </th>
                                         <th>  الاسم   </th>
                                         <th>  البريد الالكتروني  </th>
-                                        <th>  الدولة   </th>
+                                        <th> حجم التداول   </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -123,13 +123,19 @@
                                         $i = 1;
                                     @endphp
                                     @foreach($referrals as $ref)
+                                        @php
+                                            // جلب جميع trader_id للعميل
+                                            $traderIds = \App\Models\front\TraderId::where('user_id', $ref['id'])->pluck('trader_id');
+                                            // حساب مجموع حجم التداول المرتبط بالعميل
+                                            $totalTurnover = \App\Models\admin\Transaction::whereIn('trader-id', $traderIds)->sum('turnover-clear');
+                                        @endphp
                                         <tr>
                                             <td>
                                                 {{$i++}}
                                             </td>
                                             <td>{{$ref['name']}}</td>
                                             <td>{{$ref['email']}}</td>
-                                            <td> {{$ref['country']}}</td>
+                                            <td> {{ number_format($totalTurnover, 2) }} $</td>
 
                                         </tr>
 

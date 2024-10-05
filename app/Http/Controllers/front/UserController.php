@@ -83,12 +83,13 @@ class UserController extends Controller
 
         $withdrawSumCompeleted = \App\Models\admin\WithDraw::where('user_id',Auth::id())->where('status',1)->sum('amount');
 
+
         ///// Last Main Balance For User
 
         $last_main_price = $allbalance - $withdrawSumCompeleted;
         return view('front.dashboard', compact('total_balance', 'total_deposits_count', 'total_deposit_sum',
             'total_withdrawals_count', 'total_withdrawals_sum', 'turnover_clear', 'vol_share','profit','profit_without_bouns'
-            ,'user_earning','allbalance','level_bouns','current_level','last_main_price'));
+            ,'user_earning','allbalance','level_bouns','current_level','last_main_price','withdrawSumCompeleted'));
     }
 
     public function register(Request $request)

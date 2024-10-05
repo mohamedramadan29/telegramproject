@@ -51,13 +51,13 @@
                         @endphp
                         <div class="current_balance">
                             <h6> رصيدك </h6>
-                            <p> {{number_format($last_balance,2)}} دولار </p>
+                            <p> {{number_format($last_main_price,2)}} دولار </p>
                             <a href="{{url('user/withdraws')}}" class="btn btn-primary btn-sm"> انتقل الي السحب <i
                                         class="bx bx-arrow-from-right"></i> </a>
                         </div>
                         <div class="all_balance">
-                            <p> الارباح في كل الاوقات </p>
-                            <h5> {{number_format($last_vol,2)}} دولار </h5>
+                            <p> مجموع السحوبات  </p>
+                            <h5> {{number_format($withdrawSumCompeleted,2)}} دولار </h5>
                         </div>
                     </div>
 
@@ -118,7 +118,7 @@
                                     </div>
                                 </div> <!-- end col -->
                                 <div class="col-8 text-start">
-                                    <p class="text-muted mb-0"> الرصيد </p>
+                                    <p class="text-muted mb-0"> الربح  </p>
                                     <h3 class="text-dark mt-1 mb-0"> {{ number_format($allbalance,2)}} $ </h3>
 
                                 </div>
@@ -180,7 +180,7 @@
                                     </div>
                                 </div>
                                 <div class="col-8 text-start">
-                                    <p class="text-muted mb-0"> نظام الاحالات </p>
+                                    <p class="text-muted mb-0">مركز وكالات كيوتيكس </p>
 
                                 </div>
                                 <a style="margin-top: 10px" href="{{url('user/referrals')}}" type="button"
@@ -202,7 +202,7 @@
                                     </div>
                                 </div>
                                 <div class="col-8 text-start">
-                                    <p class="text-muted mb-0"> رابط الاحالة </p>
+                                    <p class="text-muted mb-0"> رابط المشاركه لمنصه Quotex </p>
 
                                 </div>
                                 <a style="margin-top: 10px" href="{{url('user/link')}}" type="button"

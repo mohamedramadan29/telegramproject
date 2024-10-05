@@ -70,7 +70,7 @@
                     <span class="nav-icon">
                         <i class="bx bx-link"></i>
                     </span>
-                    <span class="nav-text"> رابط الاحالة  </span>
+                    <span class="nav-text"> رابط الاحاله Quotex  </span>
                 </a>
             </li>
             <li class="nav-item">
@@ -78,7 +78,8 @@
                     <span class="nav-icon">
                         <i class="bx bx-link"></i>
                     </span>
-                    <span class="nav-text"> نظام الاحالات   </span>
+                    <span class="nav-text">
+مركز وكالات كيوتيكس  </span>
                 </a>
             </li>
 
