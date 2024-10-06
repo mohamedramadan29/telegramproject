@@ -44,6 +44,7 @@ class BootController extends Controller
                 $boot->name = $data['name'];
                 $boot->username = $data['username'];
                 $boot->link = $data['link'];
+                $boot->notes = $data['notes'];
                 $boot->save();
                 return $this->success_message(' تم اضافة البوت بنجاح  ');
             } catch (\Exception $e) {
@@ -77,6 +78,7 @@ class BootController extends Controller
                     'name'=>$data['name'],
                     'username'=>$data['username'],
                     'link'=>$data['link'],
+                    'notes'=>$data['notes'],
                 ]);
                 return $this->success_message(' تم تعديل البوت بنجاح  ');
             } catch (\Exception $e) {

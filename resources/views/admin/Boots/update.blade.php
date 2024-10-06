@@ -24,6 +24,10 @@
                         <input required type="text" name="link" class="form-control" placeholder="الرابط"
                                value="{{$boot['link']}}">
                     </div>
+                    <div class="mb-3">
+                        <label for=""> ملاحظات   </label>
+                        <textarea name="notes" class="form-control">{{$boot['notes']}}</textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> رجوع</button>

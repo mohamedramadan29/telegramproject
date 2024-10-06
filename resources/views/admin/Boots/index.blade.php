@@ -49,7 +49,8 @@
                                         </th>
                                         <th>  اسم البوت </th>
                                         <th> المسمي التعريفي </th>
-                                        <th>  رابط البوت   </th>
+                                        <th>  رابط البوت </th>
+                                        <th> ملاحظات </th>
                                         <th> العمليات</th>
                                     </tr>
                                     </thead>
@@ -66,6 +67,9 @@
                                             <td><img width="30px" src="{{asset('assets/admin/images/boot.jpg')}}" alt=""> {{$boot['name']}} </td>
                                             <td> {{$boot['username']}}  </td>
                                             <td><a href="{{$boot['link']}}" class="btn btn-success"> زيارة البوت  </a>  </td>
+                                            <td>
+                                            {{$boot['notes']}}
+                                            </td>
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <button type="button" class="btn btn-soft-danger btn-sm"
