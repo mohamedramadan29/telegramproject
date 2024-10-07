@@ -38,17 +38,15 @@
                                 <table id="table-search" class="table table-bordered gridjs-table align-middle mb-0 table-hover table-centered">
                                     <thead class="bg-light-subtle">
                                     <tr>
-                                        <th style="width: 20px;">
-                                        </th>
-                                        <th> المعرف   </th>
-                                        <th>  الدولة  </th>
-                                        <th>  الرمز التعريفي  </th>
-                                        <th>  الرصيد </th>
-                                        <th> عدد مرات الايداع  </th>
-                                        <th> مجموع الايداع   </th>
-                                        <th> مرات السحب </th>
-                                        <th>  المجموع  </th>
-                                        <th> التاريخ   </th>
+                                        <th> المعرف (id)</th>
+                                        <th> الرصيد</th>
+                                        <th> عدد الايداعات</th>
+                                        <th> مجموع الايداعات</th>
+                                        <th> عدد السحوبات</th>
+                                        <th> مجموع السحوبات</th>
+                                        <th> حجم التداول</th>
+                                        {{--                                        <th> حصة الشريك</th>--}}
+                                        <th> حالة الحساب</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -59,21 +57,38 @@
                                     @foreach($transactions as $transaction)
                                         <tr>
                                             <td>
-                                                {{$i++}}
+                                                <p style="margin: 0;padding: 0px"> {{$transaction['trader-id']}}</p>
+                                                <p style="margin: 0;padding: 0px"> {{$transaction['country']}}  </p>
+                                                <p style="margin: 0;padding: 0px"> {{$transaction['registery-date']}} </p>
                                             </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
-                                            <td> {{$transaction['trader']}} </td>
+                                            <td> {{$transaction['balance']}} </td>
+                                            <td> {{$transaction['deposits-count']}} </td>
+                                            <td> {{$transaction['deposits-sum']}} </td>
+                                            <td> {{$transaction['withdrawals-count']}} </td>
+                                            <td> {{$transaction['withdrawals-sum']}} </td>
+                                            <td> {{$transaction['turnover-clear']}} </td>
+                                            {{--                                            <td> {{$transaction['vol-share']}} </td>--}}
+                                            <td> @if($transaction['is-closed'] == 0)
+                                                    <span class="badge badge-outline-success"> فعال </span>
+                                                @else
+                                                    <span class="badge badge-outline-danger"> غير فعال </span>
+                                                @endif </td>
                                         </tr>
                                     @endforeach
 
+
                                     </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td style="color: #FE6C2F"> <strong> {{$transactions->count()}}  </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_balance}}  $</strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_deposits_count}}  </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_deposit_sum}} $ </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_withdrawals_count}}  </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$total_withdrawals_sum}} $  </strong></td>
+                                        <td style="color: #FE6C2F"><strong> {{$turnover_clear}} $ </strong></td>
+                                    </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                             <!-- end table-responsive -->
