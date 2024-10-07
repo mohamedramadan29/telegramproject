@@ -6,6 +6,12 @@
 
     {{--    <!-- DataTables CSS -->--}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <style>
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 1px 5px !important;
+        }
+    </style>
+
 @endsection
 @section('content')
     <!-- ==================================================== -->
@@ -254,8 +260,3 @@
     </script>
 @endsection
 
-<style>
-    table.dataTable tbody th, table.dataTable tbody td {
-        padding: 1px 5px !important;
-    }
-</style>
