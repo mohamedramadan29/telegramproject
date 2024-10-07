@@ -1,9 +1,8 @@
 @extends('admin.layouts.master')
 @section('title')
-     مستوي الاحالات
+    العملاء
 @endsection
 @section('css')
-
     {{--    <!-- DataTables CSS -->--}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 @endsection
@@ -29,16 +28,8 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                            <h4 class="card-title flex-grow-1"> مستوي الاحالات   </h4>
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#add_attribute">
-                              اضافة مستوي جديد
-                                <i class="ti ti-plus"></i>
-                            </button>
-                            @include('admin.Levels.add')
+                            <h4 class="card-title flex-grow-1"> العملاء  </h4>
                         </div>
-
-
                         <div>
                             <div class="table-responsive">
                                 <table id="table-search"
@@ -47,53 +38,52 @@
                                     <tr>
                                         <th style="width: 20px;">
                                         </th>
-                                        <th>  المستوي  </th>
+                                        <th>  الاسم  </th>
+                                        <th>  البريد الالكتروني  </th>
+                                        <th> عدد ال traders id  </th>
                                         <th> حجم التداول  </th>
-                                        <th>   نسبة ال vol-share </th>
-{{--                                        <th>   bouns  </th>--}}
-                                        <th> العمليات</th>
+                                        <th> المستوي الحالي  </th>
+                                        <th> عدد السحوبات   </th>
+                                        <th>  قيمة السحوبات  </th>
+                                        <th> الرصيد الحالي  </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @php
                                         $i = 1;
                                     @endphp
-                                    @foreach($levels as $level)
+                                    @foreach($users as $user)
                                         <tr>
                                             <td>
                                                 {{$i++}}
                                             </td>
-                                            <td>{{$level['name']}}</td>
-                                            <td> {{$level['turnover']}} $ </td>
-                                            <td> {{$level['percent_volshare']}} % </td>
-{{--                                            <td> {{$level['Bonus']}} $ </td>--}}
-                                            <td>
-                                                <div class="d-flex gap-2">
-                                                    <button type="button" class="btn btn-soft-danger btn-sm"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#edit_withdraw_{{$level['id']}}">
-                                                        <iconify-icon icon="solar:pen-2-broken"
-                                                                      class="align-middle fs-18"></iconify-icon>
-                                                    </button>
-
-                                                        <button type="button" class="btn btn-soft-danger btn-sm"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#delete_withdraw_{{$level['id']}}">
-                                                            <iconify-icon icon="solar:trash-bin-minimalistic-2-broken"
-                                                                          class="align-middle fs-18"></iconify-icon>
-                                                        </button>
-
-                                                </div>
-                                            </td>
+                                            <td> {{$user['name']}}  </td>
+                                            <td> {{$user['email']}} </td>
+                                            <td> {{$user->traderIds->count()}} </td>
+                                            <td> {{$user->transactions->sum('turnover-clear')}} $ </td>
+                                            <td> {{$user->level->name}} </td>
+                                            <td> {{$user->withdrawals->count()}} </td>
+                                             <td>{{$user->withdrawals->sum('amount')}}</td>
+                                            <td>  </td>
                                         </tr>
-                                        <!-- Modal -->
-                                        @include('admin.Levels.update')
-                                        @include('admin.Levels.delete')
+
                                     @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
                             <!-- end table-responsive -->
+                            <script>
+                                function copyToClipboard(element) {
+                                    var temp = document.createElement("textarea");
+                                    temp.value = document.querySelector(element).textContent;
+                                    document.body.appendChild(temp);
+                                    temp.select();
+                                    document.execCommand("copy");
+                                    document.body.removeChild(temp);
+                                    alert("تم نسخ الرابط بنجاح!");
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -123,6 +113,9 @@
 
             // تهيئة DataTables من جديد
             $('#table-search').DataTable({
+                "searching": false, // إلغاء البحث
+                "ordering": false,  // إلغاء الترتيب
+                "lengthChange": false,
                 "language": {
                     "search": "بحث:",
                     "lengthMenu": "عرض _MENU_ عناصر لكل صفحة",
@@ -139,3 +132,15 @@
         });
     </script>
 @endsection
+
+<style>
+    @media (max-width: 991px){
+        .my_balance .info{
+            padding: 2px !important;
+            margin-bottom: 10px;
+        }
+        .my_balance .info h5{
+            font-size: 18px !important;
+        }
+    }
+</style>

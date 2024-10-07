@@ -30,7 +30,6 @@ class WithDrawController extends Controller
         $transactions = Transaction::whereIn('trader-id', $tradersIds)
             ->orderBy('id', 'DESC')
             ->get();
-
         $turnover_sum = $transactions->sum('turnover-clear');
         $current_level = Level::where('turnover', '<=', $turnover_sum)
             ->orderBy('turnover', 'desc')
@@ -44,7 +43,6 @@ class WithDrawController extends Controller
             $profit_without_bouns = ($current_level['percent_volshare'] / 100) * $turnover_sum;
 
         }
-
         $level_bouns = $current_level['Bonus'];
         $allbalance = floatval($profit + $user_earning);
         $total_balance = $transactions->sum(function ($transaction) {

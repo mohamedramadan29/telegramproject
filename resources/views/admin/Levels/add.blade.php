@@ -24,11 +24,11 @@
                         <input required type="text" name="percent_volshare" class="form-control" placeholder="النسبة"
                                value="{{old('percent_volshare')}}">
                     </div>
-                    <div class="mb-3">
-                        <label for=""> Bonus  </label>
-                        <input required type="text" name="bonus" class="form-control" placeholder="Bonus"
-                               value="{{old('bonus')}}">
-                    </div>
+{{--                    <div class="mb-3">--}}
+{{--                        <label for=""> Bonus  </label>--}}
+{{--                        <input required type="text" name="bonus" class="form-control" placeholder="Bonus"--}}
+{{--                               value="{{old('bonus')}}">--}}
+{{--                    </div>--}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> رجوع</button>

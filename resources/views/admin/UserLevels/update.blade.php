@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">  تعديل المستوي  </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{url('admin/level/update/'.$level['id'])}}" method="post">
+            <form action="{{url('admin/user-level/update/'.$level['id'])}}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -24,11 +24,11 @@
                         <input required type="text" name="percent_volshare" class="form-control" placeholder="النسبة"
                                value="{{$level['percent_volshare']}}">
                     </div>
-{{--                    <div class="mb-3">--}}
-{{--                        <label for=""> Bonus  </label>--}}
-{{--                        <input required type="text" name="bonus" class="form-control" placeholder="Bonus"--}}
-{{--                               value="{{$level['Bonus']}}">--}}
-{{--                    </div>--}}
+                    <div class="mb-3">
+                        <label for=""> Bonus  </label>
+                        <input required type="text" name="bonus" class="form-control" placeholder="Bonus"
+                               value="{{$level['Bonus']}}">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> رجوع</button>

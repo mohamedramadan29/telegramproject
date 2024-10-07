@@ -4,19 +4,19 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
-use App\Models\admin\Boot;
 use App\Models\admin\Level;
+use App\Models\admin\UserLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-class LevelController extends Controller
+class UserLevelController extends Controller
 {
     use Message_Trait;
     public function index()
     {
-        $levels = Level::all();
-        return view('admin.Levels.index',compact('levels'));
+        $levels = UserLevel::all();
+        return view('admin.UserLevels.index',compact('levels'));
     }
 
     public function store (Request $request)
@@ -39,11 +39,11 @@ class LevelController extends Controller
                 if ($validator->fails()) {
                     return Redirect::back()->withInput()->withErrors($validator);
                 }
-                $level = new  Level();
+                $level = new  UserLevel();
                 $level->name = $data['name'];
                 $level->turnover = $data['turnover'];
                 $level->percent_volshare = $data['percent_volshare'];
-
+                $level->Bonus = $data['bonus'];
                 $level->save();
                 return $this->success_message(' تم اضافة المستوي بنجاح  ');
             } catch (\Exception $e) {
@@ -54,7 +54,7 @@ class LevelController extends Controller
 
     public function update(Request $request,$id)
     {
-        $level = Level::findOrFail($id);
+        $level = UserLevel::findOrFail($id);
         if ($request->isMethod('post')) {
             try {
 
@@ -77,7 +77,7 @@ class LevelController extends Controller
                     'name'=>$data['name'],
                     'turnover'=>$data['turnover'],
                     'percent_volshare'=>$data['percent_volshare'],
-
+                    'Bonus'=>$data['bonus'],
                 ]);
                 return $this->success_message(' تم تعديل  المستوي بنجاح  ');
             } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class LevelController extends Controller
     }
     public function delete($id)
     {
-        $level = Level::findOrFail($id);
+        $level = UserLevel::findOrFail($id);
         $level->delete();
         return $this->success_message(' تم حذف المستوي بنجاح  ');
     }

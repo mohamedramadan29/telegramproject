@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-     مستوي الاحالات
+    مستوي المستخدمين
 @endsection
 @section('css')
 
@@ -29,13 +29,13 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center gap-1">
-                            <h4 class="card-title flex-grow-1"> مستوي الاحالات   </h4>
+                            <h4 class="card-title flex-grow-1">  مستوي المستخدمين  </h4>
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#add_attribute">
                               اضافة مستوي جديد
                                 <i class="ti ti-plus"></i>
                             </button>
-                            @include('admin.Levels.add')
+                            @include('admin.UserLevels.add')
                         </div>
 
 
@@ -50,7 +50,7 @@
                                         <th>  المستوي  </th>
                                         <th> حجم التداول  </th>
                                         <th>   نسبة ال vol-share </th>
-{{--                                        <th>   bouns  </th>--}}
+                                        <th>   bouns  </th>
                                         <th> العمليات</th>
                                     </tr>
                                     </thead>
@@ -66,7 +66,7 @@
                                             <td>{{$level['name']}}</td>
                                             <td> {{$level['turnover']}} $ </td>
                                             <td> {{$level['percent_volshare']}} % </td>
-{{--                                            <td> {{$level['Bonus']}} $ </td>--}}
+                                            <td> {{$level['Bonus']}} $ </td>
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <button type="button" class="btn btn-soft-danger btn-sm"
@@ -87,8 +87,8 @@
                                             </td>
                                         </tr>
                                         <!-- Modal -->
-                                        @include('admin.Levels.update')
-                                        @include('admin.Levels.delete')
+                                        @include('admin.UserLevels.update')
+                                        @include('admin.UserLevels.delete')
                                     @endforeach
                                     </tbody>
                                 </table>

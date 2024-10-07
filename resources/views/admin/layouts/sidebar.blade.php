@@ -67,6 +67,15 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/user-levels') }}">
+                    <span class="nav-icon">
+                         <iconify-icon icon="solar:ufo-2-bold-duotone"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> مستويات العميل نفسة   </span>
+                </a>
+            </li>
+
 
             <li class="nav-item">
                 <a class="nav-link menu-arrow" href="#sidebarSupport" data-bs-toggle="collapse" role="button"
@@ -154,10 +163,7 @@
                     <ul class="nav sub-navbar-nav">
 
                         <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="customer-list.html"> جميع العملاء </a>
-                        </li>
-                        <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="customer-detail.html">Details</a>
+                            <a class="sub-nav-link" href="{{url('admin/users')}}"> جميع العملاء </a>
                         </li>
                     </ul>
                 </div>

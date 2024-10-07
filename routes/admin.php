@@ -9,6 +9,8 @@ use \App\Http\Controllers\admin\SupportController;
 use \App\Http\Controllers\admin\FaqController;
 use \App\Http\Controllers\admin\MessageReplay;
 use \App\Http\Controllers\admin\LevelController;
+use \App\Http\Controllers\admin\UsersController;
+use \App\Http\Controllers\admin\UserLevelController;
 Route::group(['prefix' => 'admin'], function () {
     // Admin Login
 
@@ -89,6 +91,19 @@ Route::group(['prefix' => 'admin'], function () {
             Route::match(['post','get'],'level/add','store');
             Route::match(['post','get'],'level/update/{id}','update');
             Route::post('level/delete/{id}','delete');
+        });
+
+        /////////////// Start Users Controller ///////////
+        ///
+        Route::controller(UsersController::class)->group(function (){
+            Route::get('users','index');
+        });
+
+        Route::controller(UserLevelController::class)->group(function (){
+            Route::get('user-levels','index');
+            Route::match(['post','get'],'user-level/add','store');
+            Route::match(['post','get'],'user-level/update/{id}','update');
+            Route::post('user-level/delete/{id}','delete');
         });
 
     });

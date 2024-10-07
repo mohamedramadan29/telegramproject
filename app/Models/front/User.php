@@ -4,6 +4,8 @@ namespace App\Models\front;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\admin\Level;
+use App\Models\admin\Transaction;
+use App\Models\admin\WithDraw;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,4 +62,22 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Level::class,'level_id');
     }
+
+    public function traderIds()
+    {
+        return $this->hasMany(TraderId::class,'user_id');
+    }
+
+    // علاقة مع Transaction (التي تحتوي على حجم التداول)
+    public function transactions()
+    {
+        return $this->hasManyThrough(Transaction::class, TraderId::class, 'user_id', 'trader-id', 'id', 'trader_id');
+    }
+
+    // علاقة مع Withdrawals
+    public function withdrawals()
+    {
+        return $this->hasMany(WithDraw::class, 'user_id');
+    }
+
 }
