@@ -32,7 +32,6 @@
                             <h4 class="card-title flex-grow-1"> قم بدعوة الاصدقاء الى منصه Quotex واحصل على نسبه ارباح على حجم التداول الكلي المتداولين .عن طريق مشاركه رابط الاحاله الخاص بك </h4>
                         </div>
 
-
                         <div>
                             <div class="table-responsive">
                                 <table
@@ -64,6 +63,12 @@
                                     </script>
 
                                 </table>
+
+                            </div>
+                            <div>
+                                <br>
+                                <br>
+                                <p> قم إنشاء حساب  Qoutex  خاص بك  عبر رابط الإحاله لزياده ربحك . </p>
                             </div>
                             <!-- end table-responsive -->
                         </div>

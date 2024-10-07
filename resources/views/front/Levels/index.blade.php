@@ -23,18 +23,21 @@
                 @endif
                 <div class="col-xl-12">
                     <div class="card">
+                        @if(isset($next_level) && $next_level != null)
                         <div style="text-align: center;line-height: 2;color: #252D33;font-size: 16px;">
                             <p>
                                 احصل على نسبه ربح (<span style="font-size: 17px;font-weight: bold;color:#E6612A;"> {{$next_level['percent_volshare']}} % </span>)وبونص بقيمه (<span style="font-size: 17px;font-weight: bold;color:#E6612A;"> {{$next_level['Bonus']}} $ </span>) عند الوصول إلى المستوى (<span style="font-size: 17px;font-weight: bold;color:#E6612A;"> {{$next_level['name']}}</span>)
                             </p>
                         </div>
+
                         <div class="progress" role="progressbar" aria-label="Warning example striped"
                              aria-valuenow=" {{$percentage_level_to_complete}}%" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar progress-bar-striped text-bg-warning"
-                                 style="width:  {{$percentage_level_to_complete}}%"> {{$percentage_level_to_complete}}%
+                                 style="width:  {{$percentage_level_to_complete}}%">  {{  number_format($percentage_level_to_complete,2)}}%
                             </div>
                         </div>
 
+                        @endif
 
                         <div class="count_level d-flex">
                             <div class="info_count">
@@ -46,7 +49,7 @@
                                 <p> {{ number_format($current_level['percent_volshare'],2)}} ٪ </p>
                             </div>
                             <div class="info_count">
-                                <h6> هدايا الحساب </h6>
+                                <h6> هدايا المستوي </h6>
                                 <p> {{ number_format($current_level['Bonus'],2)}} $ </p>
                             </div>
                             <div class="info_count">

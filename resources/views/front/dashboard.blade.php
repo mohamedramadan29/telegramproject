@@ -192,7 +192,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -203,7 +203,7 @@
                                 </div>
                                 <div class="col-8 text-start">
                                     <p class="text-muted mb-0"> رابط المشاركه لمنصه Quotex </p>
-
+                                    <p> قم إنشاء حساب  Qoutex  خاص بك  عبر رابط الإحاله لزياده ربحك . </p>
                                 </div>
                                 <a style="margin-top: 10px" href="{{url('user/link')}}" type="button"
                                    class="btn btn-sm btn-warning">

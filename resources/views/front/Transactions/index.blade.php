@@ -30,10 +30,17 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="progress" role="progressbar" aria-label="Warning example striped"
-                                     aria-valuenow="{{$current_progress}}" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar progress-bar-striped text-bg-warning" style="width: {{$current_progress}}%">{{$current_progress}}%</div>
-                                </div>
+                                @if(isset($next_level) && $next_level != null)
+
+                                    <div class="progress" role="progressbar" aria-label="Warning example striped"
+                                         aria-valuenow=" {{$percentage_level_to_complete}}%" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-striped text-bg-warning"
+                                             style="width:  {{$percentage_level_to_complete}}%">  {{  number_format($percentage_level_to_complete,2)}}%
+                                        </div>
+                                    </div>
+
+                                @endif
+
 
 
                                 <div class="count_level d-flex">
@@ -46,7 +53,7 @@
                                         <p> {{ number_format($current_level['percent_volshare'],2)}} ٪ </p>
                                     </div>
                                     <div class="info_count">
-                                        <h6> هدايا الحساب </h6>
+                                        <h6> هدايا المستوي </h6>
                                         <p> {{ number_format($current_level['Bonus'],2)}} $ </p>
                                     </div>
                                     <div class="info_count">

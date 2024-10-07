@@ -15,6 +15,7 @@ class TransactionController extends Controller
 
     public function index()
     {
+        $next_level = null;
         $user = Auth::user();
         $tradersIds = TraderId::where('user_id', Auth::id())->pluck('trader_id')->toArray();
         /////// Get All The Transactions Where Trader_id == transaction Trader Id
@@ -36,6 +37,18 @@ class TransactionController extends Controller
 
         $current_progress = 0 ;
 
+//        if ($next_level) {
+//            // حساب الفرق بين المستوى الحالي والمستوى التالي
+//            $turnover_difference = $next_level->turnover - $current_level->turnover;
+//
+//            // حساب التقدم الحالي
+//            $current_progress = $turnover_sum - $current_level->turnover;
+//
+//            // حساب النسبة المئوية للتقدم للوصول إلى المستوى التالي
+//            $percentage_level_to_complete = ($current_progress / $turnover_difference) * 100;
+//
+//        }
+
         if ($next_level) {
             // حساب الفرق بين المستوى الحالي والمستوى التالي
             $turnover_difference = $next_level->turnover - $current_level->turnover;
@@ -45,8 +58,8 @@ class TransactionController extends Controller
 
             // حساب النسبة المئوية للتقدم للوصول إلى المستوى التالي
             $percentage_level_to_complete = ($current_progress / $turnover_difference) * 100;
-
         }
+
         //dd($percentage_level_to_complete);
        //   dd($current_level);
         // حساب الربح بناءً على نسبة مستوى الربح
@@ -85,6 +98,6 @@ class TransactionController extends Controller
        // dd($profit);
         return view('front.Transactions.index', compact('transactions','turnover_sum',
             'current_level','percentage_level_to_complete','profit','current_progress','total_balance','total_deposits_count',
-        'total_deposit_sum','total_withdrawals_count','total_withdrawals_sum','turnover_clear'));
+        'total_deposit_sum','total_withdrawals_count','total_withdrawals_sum','turnover_clear','percentage_level_to_complete','next_level'));
     }
 }
