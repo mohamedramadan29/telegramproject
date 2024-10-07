@@ -29,9 +29,9 @@
                             </p>
                         </div>
                         <div class="progress" role="progressbar" aria-label="Warning example striped"
-                             aria-valuenow="{{$current_progress}}" aria-valuemin="0" aria-valuemax="100">
+                             aria-valuenow=" {{$percentage_level_to_complete}}%" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar progress-bar-striped text-bg-warning"
-                                 style="width: {{$current_progress}}%">{{$current_progress}}%
+                                 style="width:  {{$percentage_level_to_complete}}%"> {{$percentage_level_to_complete}}%
                             </div>
                         </div>
 

@@ -7,6 +7,7 @@ use App\Http\Traits\Message_Trait;
 use App\Models\admin\Admin;
 use App\Models\admin\Level;
 use App\Models\admin\Transaction;
+use App\Models\admin\UserLevel;
 use App\Models\front\TraderId;
 use App\Models\front\User;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class UserController extends Controller
 
         //  $turnover_sum = $transactions['turnover-clear']->sum();
         $turnover_sum = $transactions->sum('turnover-clear');
-        $current_level = Level::where('turnover', '<=', $turnover_sum)
+        $current_level = UserLevel::where('turnover', '<=', $turnover_sum)
             ->orderBy('turnover', 'desc')
             ->first();
 

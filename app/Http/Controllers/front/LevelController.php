@@ -5,6 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Level;
 use App\Models\admin\Transaction;
+use App\Models\admin\UserLevel;
 use App\Models\front\TraderId;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class LevelController extends Controller
 {
    public function index()
    {
-       $levels = Level::all();
+       $levels = UserLevel::all();
        $user = Auth::user();
        $tradersIds = TraderId::where('user_id', Auth::id())->pluck('trader_id')->toArray();
        /////// Get All The Transactions Where Trader_id == transaction Trader Id
@@ -23,11 +24,11 @@ class LevelController extends Controller
            ->get();
        //  $turnover_sum = $transactions['turnover-clear']->sum();
        $turnover_sum = $transactions->sum('turnover-clear');
-       $current_level = Level::where('turnover', '<=', $turnover_sum)
+       $current_level = UserLevel::where('turnover', '<=', $turnover_sum)
            ->orderBy('turnover', 'desc')
            ->first();
        // الحصول على المستوى التالي (الذي يحتاج العميل الوصول إليه)
-       $next_level = Level::where('turnover', '>', $turnover_sum)
+       $next_level = UserLevel::where('turnover', '>', $turnover_sum)
            ->orderBy('turnover', 'asc')
            ->first();
        // حساب النسبة المئوية المتبقية للوصول إلى المستوى التالي
@@ -54,6 +55,6 @@ class LevelController extends Controller
            // حساب الربح بناءً على نسبة الربح من حجم التداول
            $profit = (($current_level['percent_volshare'] / 100) * $turnover_sum) + $current_level['Bonus'] ;
        }
-       return view('front.Levels.index',compact('levels','current_level','current_progress','profit','next_level','turnover_sum'));
+       return view('front.Levels.index',compact('levels','current_level','percentage_level_to_complete','current_progress','profit','next_level','turnover_sum'));
    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Models\admin\Level;
 use App\Models\admin\Transaction;
+use App\Models\admin\UserLevel;
 use App\Models\admin\WithDraw;
 use App\Models\front\TraderId;
 use App\Models\front\User;
@@ -31,7 +32,7 @@ class WithDrawController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
         $turnover_sum = $transactions->sum('turnover-clear');
-        $current_level = Level::where('turnover', '<=', $turnover_sum)
+        $current_level = UserLevel::where('turnover', '<=', $turnover_sum)
             ->orderBy('turnover', 'desc')
             ->first();
 
@@ -75,7 +76,7 @@ class WithDrawController extends Controller
         /////////// حصة الشريك
         /// volshare = userbalance
         $turnover_sum = $transactions->sum('turnover-clear');
-        $current_level = Level::where('turnover', '<=', $turnover_sum)
+        $current_level = UserLevel::where('turnover', '<=', $turnover_sum)
             ->orderBy('turnover', 'desc')
             ->first();
 
